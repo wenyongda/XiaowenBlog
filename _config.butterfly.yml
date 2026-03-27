@@ -1,104 +1,85 @@
-# Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
+canvas_fluttering_ribbon:
+  enable: true
+  mobile: true # false 手機端不顯示 true 手機端顯示
+# # 點擊出現愛心
+# click_heart:
+#   enable: true
+#   mobile: false
+fireworks:
+  enable: true
+  zIndex: -1 # -1 or 9999
+  mobile: false
+# 美化頁面顯示
+beautify:
+  enable: true
+  field: site # site/post
+  title-prefix-icon: '\f0c1'
+  title-prefix-icon-color: "#F47466"
+# 加載動畫 Loading Animation
+preloader:
+  true
+  # enable: false
+  # source
+  # 1. fullpage-loading
+  # 2. pace (progress bar)
+  # source: 1
+  # pace theme (see https://codebyzach.github.io/pace/)
+  # pace_css_url:
 
-# Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+# 图片格式 background: url(http://xxxxxx.com/xxx.jpg)
+# 顔色 background: '#49B202'
+# 留空 显示白色
+background: "#efefef"
+# background: url(https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png)
 
-# URL
-## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
-permalink: :year/:month/:day/:title/
-permalink_defaults:
-pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+index_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
+archive_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
+# Footer设置
+since: 2022
+footer_custom_text: Hi, welcome to my Xiaowen blog!
+# footer是否显示图片背景(与top_img一致)
+footer_bg: true
 
-# Directory
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
+# 文章封面
+cover:
+  # 是否顯示文章封面
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  # 封面顯示的位置
+  # 三個值可配置 left , right , both
+  position: both
+  # 當沒有設置cover時，默認的封面顯示
+  default_cover:
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/2884F904-F1F3-479E-AE27-5EBC291B63B0.jpeg
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
+    - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
 
-# Writing
-new_post_name: :title.md # File name of new posts
-default_layout: post
-titlecase: false # Transform title into titlecase
-external_link:
-  enable: true # Open external links in new tab
-  field: site # Apply to the whole site
-  exclude: ''
-filename_case: 0
-render_drafts: false
-post_asset_folder: false
-relative_link: false
-future: true
-syntax_highlighter: highlight.js
-highlight:
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
-prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+avatar:
+  img: https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/20170331090953_zUcaS.thumb.1000_0.jpeg
+  # effect: true # 头像会一直转圈
+# Inject the css and script (aplayer/meting)
 
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
-index_generator:
-  path: ''
-  per_page: 10
-  order_by: -date
+aplayerInject:
+  enable: true
+  per_page: true
+inject:
+  head:
+    - <link rel="stylesheet" href="/css/mouse.css">
+  bottom:
+    # 7427714271
+    - <div class="aplayer no-destroy" data-id="7755841452" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-lrctype="1" data-preload="none" data-autoplay="true" muted></div>
+    - <script async src="https://npm.elemecdn.com/tzy-blog/lib/js/other/sakura.js"></script>
+    - <script src="/js/sakura-toggle.js"></script>
+pjax:
+  enable: true
+  exclude:
 
-# Category & Tag
-default_category: uncategorized
-category_map:
-tag_map:
-
-# Metadata elements
-## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
-meta_generator: true
-
-# Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
-date_format: YYYY-MM-DD
-time_format: HH:mm:ss
-## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
-
-# Pagination
-## Set per_page to 0 to disable pagination
-per_page: 10
-pagination_dir: page
-
-# Include / Exclude file(s)
-## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
-ignore:
-
-# Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-theme: butterfly
-
-# Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: ''
+# social:
+#   fab fa-github: https://github.com/xxxxx || Github
+#   fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+wordcount:
+  enable: true
