@@ -1,13 +1,14 @@
 // 樱花特效切换按钮 - 添加到 rightside 设置区域
-document.addEventListener('DOMContentLoaded', function() {
-  // 创建按钮
+function createSakuraBtn() {
+  // 检查按钮是否已存在
+  if (document.getElementById('toggle_sakura_btn')) return;
+
   const sakuraBtn = document.createElement('button');
   sakuraBtn.id = 'toggle_sakura_btn';
   sakuraBtn.type = 'button';
   sakuraBtn.title = '樱花特效切换';
   sakuraBtn.innerHTML = '<i class="fas fa-leaf"></i>';
 
-  // 插入到 rightside-config-hide 区域
   const hideArea = document.getElementById('rightside-config-hide');
   if (hideArea) {
     hideArea.appendChild(sakuraBtn);
@@ -21,4 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
       sakuraEffect.style.display = isHidden ? 'block' : 'none';
     }
   });
-});
+}
+
+// 首次加载
+document.addEventListener('DOMContentLoaded', createSakuraBtn);
+
+// PJAX 页面切换后重新创建
+document.addEventListener('pjax:complete', createSakuraBtn);
