@@ -32,6 +32,10 @@ preloader:
 background: "#efefef"
 # background: url(https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png)
 
+# 图片灯箱 - 点击放大
+# Choose: fancybox / medium_zoom
+lightbox: fancybox
+
 index_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
 archive_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
 # Footer设置
