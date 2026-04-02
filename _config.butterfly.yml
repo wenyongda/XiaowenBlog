@@ -1,59 +1,81 @@
+# ==================== 主题色与字体 ====================
+# 主題色
+theme_color:
+  enable: true
+  main: "#49B1F5"
+  paginator: "#00c4b6"
+  button_hover: "#FF7242"
+  text_selection: "#00c4b6"
+  link_color: "#99a9bf"
+  hr_color: "#A4D8FA"
+  code_foreground: "#F47466"
+  code_background: "rgba(27, 31, 35, .05)"
+  toc_color: "#00c4b6"
+  readmode_bg_color: "#FAF9DE"
+
+# 字體設置
+font:
+  global-font-size: '16px'
+  code-font-size: '16px'
+  font-family: "PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif"
+  code-font-family: "Fira Code, Consolas, Monaco, Menlo, monospace"
+
+# 網站背景
+# 設置純色背景
+background: "linear-gradient(45deg, #f2f7fa 0%, #e4f0f6 50%, #d9ecf4 100%)"
+
+# Footer設置
+since: 2022
+footer_custom_text: '<span style="color: #49B1F5;">Hi, welcome to my Xiaowen blog!</span>'
+footer_bg: true
+
+# ==================== 動態特效 ====================
 canvas_fluttering_ribbon:
   enable: true
-  mobile: true # false 手機端不顯示 true 手機端顯示
-# # 點擊出現愛心
-# click_heart:
-#   enable: true
-#   mobile: false
+  mobile: true
+
 fireworks:
   enable: true
-  zIndex: -1 # -1 or 9999
+  zIndex: -1
   mobile: false
+
+# 鼠標點擊效果 - 愛心
+click_heart:
+  enable: true
+  mobile: true
+
+# 打字效果
+typing_effect:
+  enable: true
+  hitSpeed: 100
+  humanLike: true
+
 # 美化頁面顯示
 beautify:
   enable: true
-  field: site # site/post
+  field: site
   title-prefix-icon: '\f0c1'
   title-prefix-icon-color: "#F47466"
-# 加載動畫 Loading Animation
+
+# 加載動畫
 preloader:
-  true
-  # enable: false
-  # source
-  # 1. fullpage-loading
-  # 2. pace (progress bar)
-  # source: 1
-  # pace theme (see https://codebyzach.github.io/pace/)
-  # pace_css_url:
+  enable: true
+  source: 1
+  pace_css_url:
 
-# 图片格式 background: url(http://xxxxxx.com/xxx.jpg)
-# 顔色 background: '#49B202'
-# 留空 显示白色
-background: "#efefef"
-# background: url(https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png)
-
-# 图片灯箱 - 点击放大
-# Choose: fancybox / medium_zoom
-lightbox: fancybox
-
+# ==================== 首頁卡片樣式 ====================
+# 首頁頂部圖
 index_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
 archive_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
-# Footer设置
-since: 2022
-footer_custom_text: Hi, welcome to my Xiaowen blog!
-# footer是否显示图片背景(与top_img一致)
-footer_bg: true
+tag_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/2884F904-F1F3-479E-AE27-5EBC291B63B0.jpeg
+category_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg
 
 # 文章封面
 cover:
-  # 是否顯示文章封面
   index_enable: true
   aside_enable: true
   archives_enable: true
-  # 封面顯示的位置
-  # 三個值可配置 left , right , both
   position: both
-  # 當沒有設置cover時，默認的封面顯示
   default_cover:
     - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg
     - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/2884F904-F1F3-479E-AE27-5EBC291B63B0.jpeg
@@ -62,9 +84,107 @@ cover:
     - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
     - https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper@1.0.0/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
 
+# 文章meta顯示
+post_meta:
+  page:
+    date_type: both
+    date_format: relative
+    categories: true
+    tags: true
+  post:
+    date_type: both
+    date_format: relative
+    categories: true
+    tags: true
+
+# ==================== 側邊欄美化 ====================
+# 頭像
 avatar:
   img: https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/20170331090953_zUcaS.thumb.1000_0.jpeg
-  # effect: true # 头像会一直转圈
+  effect: true
+
+# 側邊欄設置
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: right
+
+# 側邊欄卡片
+card_author:
+  enable: true
+  description: 热爱编程，热爱生活
+  button:
+    enable: true
+    icon: fab fa-github
+    text: 关注我
+    link: https://github.com/wenyongda
+
+card_announcement:
+  enable: true
+  content: 欢迎来到我的博客，记录学习与生活～
+
+card_recent_post:
+  enable: true
+  limit: 5
+  sort: date
+  sort_order:
+  categories: true
+
+card_categories:
+  enable: true
+  limit: 8
+  expand: none
+  sort_order:
+
+card_tags:
+  enable: true
+  limit: 40
+  color: true
+  sort_order:
+
+card_archives:
+  enable: true
+  type: monthly
+  format: MMMM YYYY
+  order: -1
+  limit: 8
+  sort_order:
+
+card_webinfo:
+  enable: true
+  post_count: true
+  last_push_date: true
+  sort_order:
+
+# 目錄設置
+toc:
+  enable: true
+  number: true
+  style_simple: false
+  scroll_percent: true
+
+# ==================== 其他美化 ====================
+# 圖片燈箱
+lightbox: fancybox
+
+# 圖片懒加載
+lazyload:
+  enable: true
+  field: site
+  placeholder:
+  blur: false
+
+# 圖片放大
+fancybox: true
+
+# 代碼塊美化
+code_word_wrap: true
+
+# 高亮主題
+highlight_theme: mac
+
 # Inject the css and script (aplayer/meting)
 
 aplayerInject:
