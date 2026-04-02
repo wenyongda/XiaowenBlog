@@ -25,9 +25,15 @@ font:
 background: "linear-gradient(45deg, #f2f7fa 0%, #e4f0f6 50%, #d9ecf4 100%)"
 
 # Footer設置
-since: 2022
-footer_custom_text: '<span style="color: #49B1F5;">Hi, welcome to my Xiaowen blog!</span>'
-footer_bg: true
+footer:
+  nav:
+  owner:
+    enable: true
+    since: 2022
+  copyright:
+    enable: true
+    version: true
+  custom_text: '<span>Hi, welcome to Xiaowen blog!</span><br>ICP备案号: <a href="https://beian.miit.gov.cn" target="_blank">辽ICP备2025052969号-1</a>'
 
 # ==================== 動態特效 ====================
 canvas_fluttering_ribbon:
