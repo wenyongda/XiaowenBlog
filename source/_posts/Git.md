@@ -126,7 +126,7 @@ git stash list
    启动 **PuTTY Key Generator**
 
 6. 依次点击
-   ![image-20250416151051085](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151051085.png)
+   ![image-20250416151051085](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151051085.png)
 
 7. PPKfile version 选择 2
    ![image-20250416151128595](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151128595.png)
