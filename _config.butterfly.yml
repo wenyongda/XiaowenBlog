@@ -186,10 +186,31 @@ lazyload:
 fancybox: true
 
 # 代碼塊美化
-code_word_wrap: true
+code_blocks:
+# Code block theme: darker / pale night / light / ocean / false
+  theme: pale night
+  macStyle: true
+  # Code block height limit (unit: px)
+  height_limit: 200
+  word_wrap: true
 
-# 高亮主題
-highlight_theme: mac
+  # Toolbar
+  copy: true
+  language: true
+  # true: shrink the code blocks | false: expand the code blocks | none: expand code blocks and hide the button
+  shrink: false
+  fullpage: trie
+
+
+# Snackbar 彈窗
+# https://github.com/polonel/SnackBar
+# position 彈窗位置
+# 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
+snackbar:
+  enable: true
+  position: bottom-left
+  bg_light: '#49b1f5' #light mode時彈窗背景
+  bg_dark: '#2d3035' #dark mode時彈窗背景
 
 # Inject the css and script (aplayer/meting)
 
@@ -213,3 +234,10 @@ pjax:
 #   fas fa-envelope: mailto:xxxxxx@gmail.com || Email
 wordcount:
   enable: true
+
+# https://instant.page/
+# prefetch (預加載)
+instantpage: true
+
+# Stretches the lines so that each line has equal width（文字向兩側對齊，對最後一行無效）
+text_align_justify: true
