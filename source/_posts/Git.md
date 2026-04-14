@@ -122,14 +122,14 @@ git stash list
    > id_rsa.pub是公钥
 
 5. SourceTree配置
-   ![image-20250416142637966](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416142637966.png)
+   ![image-20250416142637966](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416142637966.png)
    启动 **PuTTY Key Generator**
 
 6. 依次点击
    ![image-20250416151051085](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151051085.png)
 
 7. PPKfile version 选择 2
-   ![image-20250416151128595](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151128595.png)
+   ![image-20250416151128595](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151128595.png)
 
 8. 选择之前生成的id_rsa
    ![image-20250416151307312](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151307312.png)
@@ -305,10 +305,10 @@ git config --global https.proxy  'http://127.0.0.1:代理的port'
 5. 右侧下拉框 **Generate new token (classic)**
 
 6. 按以下配置
-   ![在这里插入图片描述](D:\source\repos\XiaodaBlogSource\source\_posts\Git\2ceb11682cc7230cf1220ecb78e548b5.png)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/2ceb11682cc7230cf1220ecb78e548b5.png)
 
 7. 得到 token
-   ![在这里插入图片描述](D:\source\repos\XiaodaBlogSource\source\_posts\Git\76ad4bb4370c7ae798f7b92c25859901.png)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/76ad4bb4370c7ae798f7b92c25859901.png)
 
 8. 修改现有项目的url
    ```shell
