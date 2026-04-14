@@ -52,7 +52,7 @@ cd /
 # 跳转root目录
 cd ~
 # 跳转至主目录（后面跟个空格就行）
-cd 
+cd
 ```
 
 ### 复制粘贴：
@@ -173,8 +173,8 @@ netstat -lnp | grep 8080
 ### 获取路径：
 
 ```shell
-readlink -f sample.txt /home/gliu/sample.txt 
-realpath -s sample.txt /home/gliu/sample.txt 
+readlink -f sample.txt /home/gliu/sample.txt
+realpath -s sample.txt /home/gliu/sample.txt
 find $(pwd) -name sample.txt /home/gliu/sample.txt
 ls -l $PWD/sample.txt
 ```
@@ -183,7 +183,7 @@ ls -l $PWD/sample.txt
 
 ```shell
 # 列出当前目录下所有文件的大小，以及所有文件大小的统计总和
-ls -lht	
+ls -lht
 ```
 
 
@@ -432,10 +432,10 @@ vim /etc/sudoers
 > ps:这里说下你可以sudoers添加下面四行中任意一条
 >
 > ```
-> youuser            ALL=(ALL)                ALL  
-> %youuser           ALL=(ALL)                ALL  
-> youuser            ALL=(ALL)                NOPASSWD: ALL  
-> %youuser           ALL=(ALL)                NOPASSWD: ALL  
+> youuser            ALL=(ALL)                ALL
+> %youuser           ALL=(ALL)                ALL
+> youuser            ALL=(ALL)                NOPASSWD: ALL
+> %youuser           ALL=(ALL)                NOPASSWD: ALL
 > ```
 > 第一行:允许用户youuser执行sudo命令(需要输入密码).
 > 第二行:允许用户组youuser里面的用户执行sudo命令(需要输入密码).
@@ -723,32 +723,32 @@ flush privileges;
     ```
 
     设置表名不区分大小写
-    
+
     ```shell
     vim /etc/my.cnf.d/mysql-server.cnf
     # 在 [mysqld] 中添加
     lower_case_table_names=1
     ```
-    
+
     初始化后查询是否生效
-    
+
     ```mysql
     show global variables like '%lower_case%';
     # lower_case_table_names 为 1
     ```
-    
+
     启动 MySQL 服务并通过运行以下命令使其在启动时自动启动:
-    
+
     ```shell
     sudo systemctl status mysqld
     sudo systemctl enable --now mysqld
     ```
-    
+
     确认安装并检查已安装的 MySQL 构建版本：
     ```shell
     mysql --version
     ```
-    
+
 3. 在 AlmaLinux 9 上保护 MySQL。
     默认情况下，MySQL 未加固。 您可以使用 `mysql_secure_installation` 脚本。 您应该仔细阅读以下每个步骤，这些步骤将设置 root 密码、删除匿名用户、禁止远程 root 登录、删除测试数据库和访问安全 MySQL：
 
@@ -1272,7 +1272,7 @@ t
 # 输入 w 命令 代表改动由内存写入到硬盘中
 ```
 
-手动挂载硬盘 
+手动挂载硬盘
 
 ```shell
 mkdir /sdb
@@ -1340,7 +1340,7 @@ systemctl daemon-reload
 确认当前文件系统类型
 
 ```shell
-df -Th | grep /dev/sdb1                                                                                     
+df -Th | grep /dev/sdb1
 /dev/sdb1         ext3   2.2T  60G 2.0T  3% /sdb
 ```
 
@@ -1354,7 +1354,7 @@ umount /dev/sdb1
 
 ```shell
 e2fsck -f /dev/sdb1
- 
+
 e2fsck 1.46.5 (30-Dec-2021)
 第 1 步：检查inode、块和大小
 第 2 步：检查目录结构
@@ -1613,7 +1613,7 @@ swappiness的值的大小对如何使用swap分区是有着很大的联系的。
 查看swappiness
 
 ```shell
-cat /proc/sys/vm/swappiness 
+cat /proc/sys/vm/swappiness
 ```
 
 修改swappiness值为60
@@ -1625,7 +1625,7 @@ sysctl vm.swappiness=60
 但是这只是临时性的修改，还要做一步
 
 ```shell
-vim /etc/sysctl.conf 
+vim /etc/sysctl.conf
 # 编辑这行
 vm.swappiness=60
 # 应用更改
@@ -1667,7 +1667,7 @@ yum install -y https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
 ```shell
 yum --enablerepo=elrepo-kernel install kernel-ml -y &&
 sed -i s/saved/0/g /etc/default/grub &&
-grub2-mkconfig -o /boot/grub2/grub.cfg 
+grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
 重启
@@ -2568,7 +2568,7 @@ sudo dnf install p7zip p7zip-plugins
 ## 安装 Nginx
 
 ```shell
-tar -zxvf nginx-1.21.4.tar.gz 
+tar -zxvf nginx-1.21.4.tar.gz
 cd nginx-1.21.4/
 ./configure
 make
@@ -2907,28 +2907,28 @@ dnf install -y zsh
 
 ### 脚本安装
 
-| **Method**                                       | **Command**                                                  |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| **curl**                                         | `sh -c "$(curl -fsSL https://install.ohmyz.sh/)"`            |
-| **wget**                                         | `sh -c "$(wget -O- https://install.ohmyz.sh/)"`              |
-| **fetch**                                        | `sh -c "$(fetch -o - https://install.ohmyz.sh/)"`            |
+| **Method**                                       | **Command**                                                                          |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| **curl**                                         | `sh -c "$(curl -fsSL https://install.ohmyz.sh/)"`                                    |
+| **wget**                                         | `sh -c "$(wget -O- https://install.ohmyz.sh/)"`                                      |
+| **fetch**                                        | `sh -c "$(fetch -o - https://install.ohmyz.sh/)"`                                    |
 | 国内curl[镜像](https://gitee.com/pocmon/ohmyzsh) | `sh -c "$(curl -fsSL https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"` |
-| 国内wget[镜像](https://gitee.com/pocmon/ohmyzsh) | `sh -c "$(wget -O- https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"` |
+| 国内wget[镜像](https://gitee.com/pocmon/ohmyzsh) | `sh -c "$(wget -O- https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"`   |
 
 注意：同意使用 Oh-my-zsh 的配置模板覆盖已有的 `.zshrc`。
 
-![image-20250417105106956](http://minio.wenyongdalucky.club:9000/hexo/image-20250417105106956.png)
+![image-20250417105106956](https://rustfs.wenyongdalucky.club:443/hexo/image-20250417105106956.png)
 
 ### 从`.bashrc`中迁移配置（可选）
 
 如果之前在使用`bash`时自定义了一些环境变量、别名等，那么在切换到`zsh`后，你需要手动迁移这些自定义配置。
 
 ```shell
-# 查看bash配置文件，并手动复制自定义配置 
-cat ~/.bashrc 
-# 编辑zsh配置文件，并粘贴自定义配置 
-vim ~/.zshrc 
-# 启动新的zsh配置 
+# 查看bash配置文件，并手动复制自定义配置
+cat ~/.bashrc
+# 编辑zsh配置文件，并粘贴自定义配置
+vim ~/.zshrc
+# 启动新的zsh配置
 source ~/.zshrc
 ```
 
@@ -3163,7 +3163,7 @@ vim install.sh
 ## 安装 ElasticSearch
 
 ```shell
-cd /etc/yum.repos.d 
+cd /etc/yum.repos.d
 vim elasticsearch.repo
 
 [elasticsearch]
