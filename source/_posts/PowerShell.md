@@ -317,11 +317,11 @@ if ($expirationDate -le $threshold) {
 
 输出如下：
 
-![image-20250718112238088](D:\source\repos\XiaodaBlogSource\source\_posts\PowerShell\image-20250718112238088.png)
+![image-20250718112238088](https://rustfs.wenyongdalucky.club:443/hexo/image-20250718112238088.png)
 
 可结合任务计划程序进行使用，免去手动执行的烦恼
 
-![image-20250718142611106](D:\source\repos\XiaodaBlogSource\source\_posts\PowerShell\image-20250718142611106.png)
+![image-20250718142611106](https://rustfs.wenyongdalucky.club:443/hexo/image-20250718142611106.png)
 
 ### 🧩 步骤 1：打开任务计划程序
 
@@ -339,7 +339,7 @@ if ($expirationDate -le $threshold) {
   - 勾选“不管用户是否登录都要运行”
   - 勾选“使用最高权限”
 
-![image-20250718142545538](D:\source\repos\XiaodaBlogSource\source\_posts\PowerShell\image-20250718142545538.png)
+![image-20250718142545538](https://rustfs.wenyongdalucky.club:443/hexo/image-20250718142545538.png)
 
 ### 🧩 步骤 3：设置触发器
 
@@ -351,7 +351,7 @@ if ($expirationDate -le $threshold) {
    - 勾选“启用此触发器”
 4. 点击 **确定** 。
 
-![image-20250718142556458](D:\source\repos\XiaodaBlogSource\source\_posts\PowerShell\image-20250718142556458.png)
+![image-20250718142556458](https://rustfs.wenyongdalucky.club:443/hexo/image-20250718142556458.png)
 
 ### 🧩 步骤 4：设置操作
 
