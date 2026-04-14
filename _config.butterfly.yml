@@ -213,8 +213,3 @@ pjax:
 #   fas fa-envelope: mailto:xxxxxx@gmail.com || Email
 wordcount:
   enable: true
-
-post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
