@@ -14,61 +14,61 @@ tags:
 
 ### 选择语言：English
 
-![image-20250509100201646](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100201646.png)
+![image-20250509100201646](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100201646.png)
 
 ### 键盘默认：English
 
-![image-20250509100212670](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100212670.png)
+![image-20250509100212670](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100212670.png)
 
 ### 安装类型：Ubuntu Server
 
 选择默认第一个（会自带一些组件，方便使用）
 
-![image-20250509100247973](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100247973.png)
+![image-20250509100247973](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100247973.png)
 
 ### 网络配置
 
 使用 DHCP 或者 静态IP (建议这里设置好 静态IP，如果选择 DHCP，则在此界面直接选择Done 后即可)
 
-![image-20250509100604701](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100604701.png)
+![image-20250509100604701](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100604701.png)
 
 静态IP 选择 Edit IPv4
 
-![image-20250509100656239](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100656239.png)
+![image-20250509100656239](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100656239.png)
 
 然后选择 Manual
 
-![image-20250509100804038](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509100804038.png)
+![image-20250509100804038](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509100804038.png)
 
-![image-20250509102609874](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509102609874.png)
+![image-20250509102609874](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509102609874.png)
 
 ### 代理配置
 
 **Configure proxy配置页面的Proxy address无需配置**
 
-![image-20250509102734539](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509102734539.png)
+![image-20250509102734539](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509102734539.png)
 
 ### 镜像源配置
 
 默认清华源
 
-![image-20250509102858753](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509102858753.png)
+![image-20250509102858753](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509102858753.png)
 
 ### 安装磁盘配置
 
 **选择安装磁盘，直接回车默认自动分配，需要手动分区的话选择 [custom storage layout]**
 
-![image-20250509111350269](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509111350269.png)
+![image-20250509111350269](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509111350269.png)
 
 选择 **custom storage layout**
 
-![image-20250509112338500](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509112338500.png)
+![image-20250509112338500](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509112338500.png)
 
-![image-20250509112354306](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509112354306.png)
+![image-20250509112354306](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509112354306.png)
 
 首先分配swap分区：一般基于物理内存的 2-4倍
 
-![image-20250509112453286](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509112453286.png)
+![image-20250509112453286](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509112453286.png)
 
 /boot 分区，一般2G足以
 
@@ -87,29 +87,29 @@ tags:
 
 ### 安装 OpenSSH 服务
 
-![image-20250509121806128](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509121806128.png)
+![image-20250509121806128](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509121806128.png)
 
 ### 选择预置环境
 
 按需选取，不需要则直接选择 Done 回车继续
 
-![image-20250509121923077](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509121923077.png)
+![image-20250509121923077](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509121923077.png)
 
 安装系统中
 
-![image-20250509122057921](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509122057921.png)
+![image-20250509122057921](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509122057921.png)
 
 安装完成后重启即可
 
-![image-20250509122413007](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509122413007.png)
+![image-20250509122413007](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509122413007.png)
 
 重启完成，进入系统
 
-![image-20250509123500684](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509123500684.png)
+![image-20250509123500684](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509123500684.png)
 
 ## 配置网络
 
-![image-20250509124052044](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509124052044.png)
+![image-20250509124052044](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509124052044.png)
 
 ```shell
 cd /etc/netplan
@@ -130,17 +130,17 @@ network:
 
 在VirtualBox中工具->网络中 增加仅主机(Host-Only)网络
 
-![image-20250509124733922](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509124733922.png)
+![image-20250509124733922](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509124733922.png)
 
 网卡如果要是DHCP就选自动配置网卡，否则手动分配就选手动配置网卡
 
 如果选DHCP，还需要启动服务器
 
-![image-20250509124838460](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509124838460.png)
+![image-20250509124838460](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509124838460.png)
 
 配置好后，在对应虚拟机中，添加好网卡，连接方式选择仅主机(Host-Only)网络，名称选择刚刚在工具中配置的
 
-![image-20250509125003457](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509125003457.png)
+![image-20250509125003457](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509125003457.png)
 
 以上修改需要先重启虚拟机
 
@@ -173,7 +173,7 @@ sudo netplan apply
 
 若不报错，则修改成功，再执行`ip a`查看网卡信息
 
-![image-20250509125542444](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250509125542444.png)
+![image-20250509125542444](https://rustfs.wenyongdalucky.club:443/hexo/image-20250509125542444.png)
 
 ip地址已经生效，可以在主机里 ping 一下
 
@@ -458,7 +458,7 @@ systemctl status xrdp
 sudo ufw allow from any to any port 3389 proto tcp
 ```
 
-![image-20250721085911086](D:\source\repos\XiaodaBlogSource\source\_posts\ubuntu\image-20250721085911086-1753248149581-28.png)
+![image-20250721085911086](https://rustfs.wenyongdalucky.club:443/hexo/image-20250721085911086-1753248149581-28.png)
 
 **接下来**，查看你的 Ubuntu 系统的 IP 地址，并在某处记下它。在您的终端上运行：
 

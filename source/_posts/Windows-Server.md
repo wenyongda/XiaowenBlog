@@ -19,13 +19,13 @@ C:\Program Files\dotnet\sdk\9.0.302\Sdks\Microsoft.NET.Sdk.Publish\targets\Publi
 
 计算机管理
 
-![image-20250721105643718](D:\source\repos\XiaodaBlogSource\source\_posts\Windows-Server\image-20250721105643718.png)
+![image-20250721105643718](https://rustfs.wenyongdalucky.club:443/hexo/image-20250721105643718.png)
 
-![image-20250721105806368](D:\source\repos\XiaodaBlogSource\source\_posts\Windows-Server\image-20250721105806368.png)
+![image-20250721105806368](https://rustfs.wenyongdalucky.club:443/hexo/image-20250721105806368.png)
 
 之后打开服务，找到Web 部署代理服务，重新启动一下
 
-![image-20250721111012495](D:\source\repos\XiaodaBlogSource\source\_posts\Windows-Server\image-20250721111012495.png)
+![image-20250721111012495](https://rustfs.wenyongdalucky.club:443/hexo/image-20250721111012495.png)
 
 # IIS(Internet Information Services)
 
