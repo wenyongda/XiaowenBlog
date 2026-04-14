@@ -253,13 +253,13 @@ setenforce 0
 ![image-20231007124717167](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20231007124717167.png)
 
 1. 解压下载好的压缩包
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120105901505.png#pic_left)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/20210120105901505.png)
 
 2. 解压后得到
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120105247435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NXZVFpbg==,size_16,color_FFFFFF,t_70#pic_center)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/20210120105247435.png)
 
 3. 新建一个 `my.ini`文件
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120110525427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NXZVFpbg==,size_16,color_FFFFFF,t_70#pic_center)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/20210120110525427.png)
 
 4. 解压后的mysql根目录下没有my.ini文件，自己去网上找一份就可或者使用我在后面给出的代码。.ini文件会在初始化mysql中用到
    ```ini
@@ -313,10 +313,10 @@ setenforce 0
    ```
 
 8. 初始化完成后，mysqld根目录下会自动新增data文件夹
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120153744844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NXZVFpbg==,size_16,color_FFFFFF,t_70#pic_center)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/20210120153744844.png)
 
 9. 打开data文件夹，找到.err后缀文本打开
-   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120153933128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NXZVFpbg==,size_16,color_FFFFFF,t_70#pic_center)
+   ![在这里插入图片描述](https://rustfs.wenyongdalucky.club:443/hexo/20210120153933128.png)
 
 10. 找到文件password位置，红色框中为数据库初始化密码，后续修改初始化密码使用
     ```err
