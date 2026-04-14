@@ -132,13 +132,13 @@ git stash list
    ![image-20250416151128595](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151128595.png)
 
 8. 选择之前生成的id_rsa
-   ![image-20250416151307312](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151307312.png)
+   ![image-20250416151307312](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151307312.png)
 
 9. 出现如下，选择 **Save private key** 保存秘钥
-   ![image-20250416151416275](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151416275.png)
+   ![image-20250416151416275](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151416275.png)
 
 10. 保存到 ~/.ssh 目录即可
-    ![image-20250416151503685](D:\source\repos\XiaodaBlogSource\source\_posts\Git\image-20250416151503685.png)
+    ![image-20250416151503685](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416151503685.png)
 
 11. 在 **Sourcetree** 中 **工具** -> **选项** 中选择刚刚保存的 ppk文件即可
 
