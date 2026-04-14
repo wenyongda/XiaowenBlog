@@ -46,7 +46,7 @@ top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B951AE1
 
 ## 设置引用图片存储路径
 
-![image-20221118150139161](D:\source\repos\XiaodaBlogSource\source\_posts\Typora\image-20221118150139161.png)
+![image-20221118150139161](https://rustfs.wenyongdalucky.club:443/hexo/image-20221118150139161.png)
 
 ## Typora添加右键新建Markdown文件
 
@@ -98,7 +98,7 @@ Windows Registry Editor Version 5.00
 
 删除多余的文件（尤其是有一个什么Markdown File），只保留如下的两项。然后关闭注册表，即可修复bug
 
-![img](D:\source\repos\XiaodaBlogSource\source\_posts\Typora\regedit.png)
+![img](https://rustfs.wenyongdalucky.club:443/hexo/regedit.png)
 
 
 
@@ -125,9 +125,9 @@ Windows Registry Editor Version 5.00
 ```
 
 
-![image-20221121130426162](D:\source\repos\XiaodaBlogSource\source\_posts\Typora\image-20221121130426162.png)
+![image-20221121130426162](https://rustfs.wenyongdalucky.club:443/hexo/image-20221121130426162.png)
 
-![image-20221121130857072](D:\source\repos\XiaodaBlogSource\source\_posts\Typora\image-20221121130857072.png)
+![image-20221121130857072](https://rustfs.wenyongdalucky.club:443/hexo/image-20221121130857072.png)
 
 ## 上传图片至Minio
 
@@ -191,7 +191,7 @@ picgo upload /path/to/your/image.png
 
 ### Typora设置
 
-![image-20250416154513069](D:\source\repos\XiaodaBlogSource\source\_posts\Typora\image-20250416154513069.png)
+![image-20250416154513069](https://rustfs.wenyongdalucky.club:443/hexo/image-20250416154513069.png)
 
 ## 主题
 
