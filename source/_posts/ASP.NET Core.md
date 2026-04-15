@@ -60,11 +60,11 @@ islocalizer install {包路径}
 
 之后筛选下拉框选择如红框标注
 
-![image-20230301104542343](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301104542343.png)
+![image-20230301104542343](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301104542343.png)
 
 起一个项目名称及选择项目位置，下一步
 
-![image-20230301104644030](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301104644030.png)
+![image-20230301104644030](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301104644030.png)
 
 框架选择.Net 6.0（长期支持）
 
@@ -74,17 +74,17 @@ islocalizer install {包路径}
 
 顶级语句是无需在Program.cs中显式包含Main方法，可以使用顶级语句功能最大程度地减少必须编写的代码
 
-![image-20230301104855227](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301104855227.png)
+![image-20230301104855227](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301104855227.png)
 
 点击创建即可
 
-![image-20230301105745182](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301105745182.png)
+![image-20230301105745182](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301105745182.png)
 
 # 集成Furion框架
 
 在NuGet包管理器中搜索 `Furion`
 
-![image-20230301110105535](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301110105535.png)
+![image-20230301110105535](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301110105535.png)
 
 选择安装的项目，然后安装即可
 
@@ -100,7 +100,7 @@ app.UseInject();
 
 ## 包降级
 
-![image-20230301110232202](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230301110232202.png)
+![image-20230301110232202](https://rustfs.wenyongdalucky.club:443/hexo/image-20230301110232202.png)
 
 将提示的NuGet包升级到 前者的版本即可，比如图内的 Swashbuckle.AspNetCore 原有的版本是 6.2.3 那么升级到 6.5.0即可
 
@@ -116,7 +116,7 @@ dotnet --info
 
 ## Visual Studio添加Docker支持
 
-![image-20221121144928205](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221121144928205.png)
+![image-20221121144928205](https://rustfs.wenyongdalucky.club:443/hexo/image-20221121144928205.png)
 
 ## Linux下构建Docker镜像
 
@@ -159,7 +159,7 @@ Internet Information Services (IIS) 是一种灵活、安全且可管理的 Web 
 
    建议选择如下
 
-   ![image-20250402085450223](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20250402085450223.png)
+   ![image-20250402085450223](https://rustfs.wenyongdalucky.club:443/hexo/image-20250402085450223.png)
 
    第一次安装时间比较久，耐心等待一会。
 
@@ -180,7 +180,7 @@ Internet Information Services (IIS) 是一种灵活、安全且可管理的 Web 
 
    ![img](https://pic1.zhimg.com/80/v2-ac97c2f542c12f1acb69ade08badfd08_720w.webp)
 
-   ![image-20230921092026202](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921092026202.png)
+   ![image-20230921092026202](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921092026202.png)
 
    访问成功
 
@@ -207,19 +207,19 @@ net start w3svc
 
 选择左侧数的根目录后，在右侧选择模块，如下图所示。
 
-![image-20230921092737808](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921092737808.png)
+![image-20230921092737808](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921092737808.png)
 
 安装完成后在模块中会显示`AspNetCoreModuleV2`模块
 
-![image-20230921092956235](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921092956235.png)
+![image-20230921092956235](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921092956235.png)
 
 ## 添加网站
 
 网站=>右键添加网站
 
-![image-20230921093121380](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921093121380.png)
+![image-20230921093121380](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921093121380.png)
 
-![image-20230921093331155](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921093331155.png)
+![image-20230921093331155](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921093331155.png)
 
 在上图中，我们创建了一个网站名为：**RDICoreWeb50**，并指定了到我们网站的发布路径。
 
@@ -227,7 +227,7 @@ net start w3svc
 
 在IIS左侧选择“应用程序池”，在右则可以看到我们网站使用的“**RDICoreWeb50**”，双击打开，并做如图配置：
 
-![image-20230921093515596](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921093515596.png)
+![image-20230921093515596](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921093515596.png)
 
 ## 报错解决
 
@@ -235,15 +235,15 @@ net start w3svc
 
 ASP中配置行为 => 限制属性 => `最大请求实体主体限制` 1073741824
 
-![image-20230921131734045](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921131734045.png)
+![image-20230921131734045](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921131734045.png)
 
 配置编辑器中选择节 => system.webServer/serverRuntime
 
-![image-20230921131850345](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921131850345.png)
+![image-20230921131850345](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921131850345.png)
 
 配置`maxRequestEntityAllowed`和`uploadReadAheadSize` 1073741824
 
-![image-20230921131933569](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20230921131933569.png)
+![image-20230921131933569](https://rustfs.wenyongdalucky.club:443/hexo/image-20230921131933569.png)
 
 项目目录`web.config`配置
 
@@ -522,9 +522,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 通过NuGet包管理器 安装NuGet包
 
-![image-20221130161234399](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221130161234399.png)
+![image-20221130161234399](https://rustfs.wenyongdalucky.club:443/hexo/image-20221130161234399.png)
 
-![image-20221130161319595](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221130161319595.png)
+![image-20221130161319595](https://rustfs.wenyongdalucky.club:443/hexo/image-20221130161319595.png)
 
 Autofac
 
@@ -581,7 +581,7 @@ builder.Services.AddDbContext<SqlServerDbContext>(options =>     			  options.Us
 
 `Microsoft.AspNetCore.Authentication.JwtBearer`
 
-![image-20221206130808039](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221206130808039.png)
+![image-20221206130808039](https://rustfs.wenyongdalucky.club:443/hexo/image-20221206130808039.png)
 
 `appsettings.json`配置文件中配置
 
@@ -780,17 +780,17 @@ public ResultUtil GetUserInfo()
 
 访问登录接口
 
-![image-20221206131847333](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221206131847333.png)
+![image-20221206131847333](https://rustfs.wenyongdalucky.club:443/hexo/image-20221206131847333.png)
 
 访问需要认证的接口，需要把Token放在请求头中，如果不携带Token，访问则报401
 
-![image-20221206132042533](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221206132042533.png)
+![image-20221206132042533](https://rustfs.wenyongdalucky.club:443/hexo/image-20221206132042533.png)
 
 请求头Key 为 Authorization
 
 访问成功
 
-![image-20221206132124913](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221206132124913.png)
+![image-20221206132124913](https://rustfs.wenyongdalucky.club:443/hexo/image-20221206132124913.png)
 
 # 三大拦截器
 
