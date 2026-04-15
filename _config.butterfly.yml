@@ -1,3 +1,16 @@
+# ==================== 导航设置 ====================
+nav:
+  logo:
+  display_title: true
+  display_post_title: true
+  fixed: false
+
+menu:
+  首页: / || fas fa-home
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  归档: /archives/ || fas fa-archive
+
 # ==================== 主题色与字体 ====================
 # 主題色
 theme_color:
