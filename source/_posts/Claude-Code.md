@@ -3,6 +3,8 @@ title: Claude Code
 date: 2026-02-27 14:05:22
 tags: [AI, 效率工具]
 categories: 开发工具
+permalink: claude-code/
+tag: AI
 ---
 
 ## 简介
@@ -65,7 +67,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 **方式二：配置文件**
 
 ```json
-{    
+{
     "env": {
         "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY",
         "ANTHROPIC_BASE_URL": "https://coding.dashscope.aliyuncs.com/apps/anthropic",
@@ -95,13 +97,13 @@ claude --model claude-haiku-4-5-20251001
 
 ## 常用命令
 
-| 命令 | 说明 |
-|------|------|
-| `claude` | 启动交互式对话 |
-| `claude -p "问题"` | 直接提问并获取答案 |
-| `claude --model <模型名>` | 指定模型 |
-| `claude --version` | 查看版本 |
-| `claude --help` | 查看帮助 |
+| 命令                      | 说明               |
+| ------------------------- | ------------------ |
+| `claude`                  | 启动交互式对话     |
+| `claude -p "问题"`        | 直接提问并获取答案 |
+| `claude --model <模型名>` | 指定模型           |
+| `claude --version`        | 查看版本           |
+| `claude --help`           | 查看帮助           |
 
 ## MCP 配置
 
@@ -116,11 +118,11 @@ claude mcp add fetch -- uvx mcp-server-fetch
 
 ### 常用 MCP 服务
 
-| 服务 | 命令 | 说明 |
-|------|------|------|
-| fetch | `claude mcp add fetch -- uvx mcp-server-fetch` | 网页内容抓取 |
+| 服务       | 命令                                                                      | 说明         |
+| ---------- | ------------------------------------------------------------------------- | ------------ |
+| fetch      | `claude mcp add fetch -- uvx mcp-server-fetch`                            | 网页内容抓取 |
 | filesystem | `claude mcp add filesystem -- npx -y @anthropic-ai/mcp-server-filesystem` | 文件系统访问 |
-| git | `claude mcp add git -- npx -y @anthropic-ai/mcp-server-git` | Git 操作 |
+| git        | `claude mcp add git -- npx -y @anthropic-ai/mcp-server-git`               | Git 操作     |
 
 配置好的 MCP 配置文件实例 `~/.claude.json`
 
