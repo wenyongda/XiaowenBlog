@@ -2,6 +2,8 @@
 title: Maven与Gradle
 date: 2023-11-18 10:30:31
 author: 文永达
+tags: [Maven, Gradle, 构建工具, Java]
+categories: [开发工具, Java]
 ---
 # Maven
 

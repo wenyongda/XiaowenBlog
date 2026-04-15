@@ -2,6 +2,8 @@
 title: Hexo
 date: 2022-11-18 10:30:31
 author: 文永达
+tags: [Hexo, 博客, 静态网站, Node.js]
+categories: [开发工具, 博客]
 ---
 
 # Hexo

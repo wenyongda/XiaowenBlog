@@ -1,7 +1,8 @@
 ---
 title: PowerShell
 date: 2023-10-07 11:25:08
-tags:
+tags: [PowerShell, Windows, Shell, 命令行]
+categories: [开发工具, Windows]
 ---
 
 # PowerShell 7 使用 Oh My Posh 来美化命令行

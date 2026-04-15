@@ -3,6 +3,8 @@ title: gRPC入门与实操
 date: 2023-01-16 12:37:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
+tags: [gRPC, 微服务, RPC, Java]
+categories: [后端开发, Java]
 ---
 
 # gRPC入门与实操

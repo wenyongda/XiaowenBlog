@@ -3,6 +3,8 @@ title: Winform
 date: 2022-11-18 14:48:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
+tags: [WinForms, .NET, 桌面应用, GUI]
+categories: [后端开发, .NET]
 ---
 
 # Winform

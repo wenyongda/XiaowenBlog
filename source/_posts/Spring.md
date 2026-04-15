@@ -1,7 +1,8 @@
 ---
 title: Spring
 date: 2023-10-09 14:17:02
-tags:
+tags: [Spring, Spring Cloud, 微服务, 后端]
+categories: [后端开发, Java]
 ---
 
 # Spring Cloud

@@ -3,7 +3,8 @@ title: Linux
 date: 2021-04-07 16:04:58
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg
-
+tags: [Linux, Shell, 命令行, 操作系统]
+categories: [操作系统, Linux]
 ---
 # Linux
 

@@ -1,7 +1,8 @@
 ---
 title: VsCode
 date: 2025-04-16 15:18:28
-tags:
+tags: [VSCode, Visual Studio Code, IDE, 开发工具]
+categories: [开发工具, IDE]
 ---
 
 # 快捷键

@@ -2,6 +2,8 @@
 title: Vue3
 date: 2023-11-18 10:30:31
 author: 文永达
+tags: [Vue3, Vue, 响应式, 前端框架]
+categories: [前端开发, Vue]
 ---
 # 响应式
 

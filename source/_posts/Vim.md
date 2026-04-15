@@ -1,7 +1,8 @@
 ---
 title: Vim
 date: 2023-09-21 15:00:20
-tags:
+tags: [Vim, 编辑器, Linux, 开发工具]
+categories: [开发工具, Vim]
 ---
 
 # Vim 的工作模式

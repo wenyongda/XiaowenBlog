@@ -1,7 +1,8 @@
 ---
 title: Subversion
 date: 2025-11-27 09:46:04
-tags:
+tags: [SVN, Subversion, 版本控制, TortoiseSVN]
+categories: [开发工具, 版本控制]
 ---
 
 # TortoiseSVN

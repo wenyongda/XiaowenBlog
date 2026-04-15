@@ -1,7 +1,8 @@
 ---
 title: ubuntu
 date: 2025-05-09 09:44:01
-tags:
+tags: [Ubuntu, Linux, Server, 操作系统]
+categories: [操作系统, Linux]
 ---
 
 # Server

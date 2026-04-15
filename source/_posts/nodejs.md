@@ -1,7 +1,8 @@
 ---
 title: nodejs
 date: 2024-08-01 09:34:32
-tags:
+tags: [Node.js, nvm, JavaScript, 后端]
+categories: [后端开发, Node.js]
 ---
 
 # nvm

@@ -3,6 +3,8 @@ title: PowerDesigner
 date: 2022-12-07 9:05:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
+tags: [PowerDesigner, 数据建模, 数据库设计, 工具]
+categories: [开发工具, 数据库]
 ---
 
 # PowerDesigner 

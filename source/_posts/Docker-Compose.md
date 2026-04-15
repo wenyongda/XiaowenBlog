@@ -1,7 +1,8 @@
 ---
 title: Docker-Compose
 date: 2024-04-01 11:02:56
-tags:
+tags: [Docker, Docker-Compose, 容器编排, DevOps]
+categories: [运维, Docker]
 ---
 
 # 安装

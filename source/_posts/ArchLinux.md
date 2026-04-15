@@ -1,7 +1,8 @@
 ---
 title: ArchLinux
 date: 2025-07-28 10:26:05
-tags:
+tags: [ArchLinux, Linux, WSL, 操作系统]
+categories: [操作系统, Linux]
 ---
 
 # WSL

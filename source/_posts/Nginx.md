@@ -1,7 +1,8 @@
 ---
 title: Nginx
 date: 2023-09-25 15:42:47
-tags:
+tags: [Nginx, 反向代理, Web服务器, 负载均衡]
+categories: [运维, Web服务器]
 ---
 
 ## Nginx 隐藏版本号

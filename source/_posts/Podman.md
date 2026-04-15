@@ -1,8 +1,8 @@
 ---
 title: Podman
 date: 2025-11-26 13:38:42
-tags:
-
+tags: [Podman, 容器, Docker替代, DevOps]
+categories: [运维, 容器]
 ---
 
 # Podman命令

@@ -3,7 +3,8 @@ title: Redis
 date: 2022-12-06 22:18:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
----
+tags: [Redis, 缓存, NoSQL, 数据库]
+categories: [数据库, Redis]
 ---
 
 # 安装Redis

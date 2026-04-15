@@ -2,6 +2,8 @@
 title: Mybatis基本介绍
 date: 2022-11-18 10:30:31
 author: 文永达
+tags: [Mybatis, ORM, Java, 数据库]
+categories: [后端开发, Java]
 ---
 
 # Mybatis

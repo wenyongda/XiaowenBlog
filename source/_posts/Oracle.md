@@ -2,6 +2,8 @@
 title: Oracle
 date: 2021-03-23 10:30:31
 author: 文永达
+tags: [Oracle, 数据库, SQL, PL/SQL]
+categories: [数据库, Oracle]
 ---
 # Oracle Database
 

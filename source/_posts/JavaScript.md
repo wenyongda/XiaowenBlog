@@ -2,6 +2,8 @@
 title: JavaScript
 date: 2023-11-18 10:30:31
 author: 文永达
+tags: [JavaScript, ES6, 异步编程, 前端]
+categories: [前端开发, JavaScript]
 ---
 # 异步编程
 

@@ -1,7 +1,8 @@
 ---
 title: Windows Server
 date: 2025-07-21 10:53:55
-tags:
+tags: [Windows Server, Windows, 服务器, IIS]
+categories: [操作系统, Windows]
 ---
 
 # Web Deploy 部署任务失败解决方案

@@ -1,7 +1,8 @@
 ---
 title: macOS
 date: 2025-09-26 22:54:01
-tags:
+tags: [macOS, Apple, Homebrew, 操作系统]
+categories: [操作系统, macOS]
 ---
 
 # 环境配置

@@ -1,7 +1,8 @@
 ---
 title: React
 date: 2025-07-23 15:56:46
-tags:
+tags: [React, JSX, 前端框架]
+categories: [前端开发, React]
 ---
 
 # Vue 转 React 指南

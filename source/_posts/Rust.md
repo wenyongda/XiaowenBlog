@@ -1,7 +1,8 @@
 ---
 title: Rust
 date: 2023-09-15 09:25:54
-tags:
+tags: [Rust, 编程语言, 内存安全]
+categories: [编程语言, Rust]
 ---
 
 # Rust 教程

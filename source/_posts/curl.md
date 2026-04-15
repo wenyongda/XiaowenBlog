@@ -1,11 +1,8 @@
 ---
 title: curl 命令完全指南
 date: 2026-03-27 10:10:35
-tags:
-  - curl
-  - Linux
-  - Windows
-  - API测试
+tags: [curl, Linux, Windows, API测试, HTTP]
+categories: [开发工具, 命令行]
 ---
 
 ## 简介

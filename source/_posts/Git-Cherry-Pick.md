@@ -1,7 +1,8 @@
 ---
 title: Git Cherry-Pick
 date: 2025-12-11 23:02:39
-tags:
+tags: [Git, Cherry-Pick, 版本控制]
+categories: [开发工具, Git]
 ---
 
 # Git Cherry-Pick 详解文档

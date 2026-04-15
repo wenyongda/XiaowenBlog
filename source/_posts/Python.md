@@ -1,7 +1,8 @@
 ---
 title: Python
 date: 2025-03-10 14:26:30
-tags:
+tags: [Python, pip, 编程语言]
+categories: [编程语言, Python]
 ---
 
 # pip

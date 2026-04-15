@@ -2,6 +2,8 @@
 title: Vue
 date: 2021-03-23 10:30:31
 author: 文永达
+tags: [Vue, Vite, 前端框架]
+categories: [前端开发, Vue]
 ---
 # Vue
 

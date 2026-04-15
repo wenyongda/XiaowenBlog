@@ -1,7 +1,8 @@
 ---
 title: Windows Terminal
 date: 2025-12-12 09:31:56
-tags:
+tags: [Windows Terminal, Windows, SSH, 终端]
+categories: [开发工具, Windows]
 ---
 
 # SSH

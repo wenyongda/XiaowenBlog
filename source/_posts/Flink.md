@@ -1,7 +1,8 @@
 ---
 title: Flink
 date: 2024-04-02 14:39:41
-tags:
+tags: [Flink, 流处理, 大数据, Apache]
+categories: [大数据, 流处理]
 ---
 
 ## 流处理

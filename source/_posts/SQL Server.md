@@ -3,6 +3,8 @@ title: SQL Server
 date: 2022-11-26 14:48:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
+tags: [SQL Server, 数据库, Microsoft, SQL]
+categories: [数据库, SQL Server]
 ---
 
 # SQL Server

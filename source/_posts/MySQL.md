@@ -3,6 +3,8 @@ title: MySQL
 date: 2023-09-23 10:30:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg
+tags: [MySQL, 数据库, SQL, 备份]
+categories: [数据库, MySQL]
 ---
 
 

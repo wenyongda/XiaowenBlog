@@ -1,7 +1,8 @@
 ---
 title: .NET
 date: 2025-07-22 10:32:51
-tags:
+tags: [.NET, NuGet, 框架]
+categories: [编程语言, .NET]
 ---
 
 # Nuget包管理器

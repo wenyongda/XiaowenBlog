@@ -1,8 +1,8 @@
 ---
 title: Visual Studio
 date: 2018-09-30 18:23:38
-type: "tags"
-layout: "tags"
+tags: [Visual Studio, IDE, .NET, 开发工具]
+categories: [开发工具, IDE]
 ---
 
 # 快捷键

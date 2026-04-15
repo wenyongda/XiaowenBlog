@@ -3,6 +3,8 @@ title: Java
 date: 2023-06-09 10:30:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg
+tags: [Java, Spring Boot, 后端开发]
+categories: [编程语言, Java]
 ---
 
 # Spring Boot

@@ -1,10 +1,9 @@
 ---
 title: Claude Code
 date: 2026-02-27 14:05:22
-tags: [AI, 效率工具]
-categories: 开发工具
+tags: [AI, Claude, 效率工具, 开发工具]
+categories: [开发工具, AI]
 permalink: claude-code/
-tag: AI
 ---
 
 ## 简介

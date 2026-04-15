@@ -3,6 +3,8 @@ title: Typora
 date: 2022-11-18 14:48:31
 author: 文永达
 top_img: https://gcore.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/B951AE18-D431-417F-B3FE-A382403FF21B.jpeg
+tags: [Typora, Markdown, 编辑器, 开发工具]
+categories: [开发工具, Markdown]
 ---
 # Typora
 

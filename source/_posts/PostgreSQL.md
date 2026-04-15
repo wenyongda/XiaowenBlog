@@ -1,7 +1,8 @@
 ---
 title: PostgreSQL
 date: 2024-03-22 09:19:21
-tags:
+tags: [PostgreSQL, 数据库, SQL]
+categories: [数据库, PostgreSQL]
 ---
 
 # 配置
