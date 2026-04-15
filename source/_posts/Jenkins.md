@@ -32,21 +32,21 @@ ps aux | grep "nginx: worker process" | awk '{print $1}'
 
 新建Item
 
-![image-20221108224600422](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108224600422.png)
+![image-20221108224600422](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108224600422.png)
 
 配置Git
 
-![image-20221108224810869](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108224810869.png)
+![image-20221108224810869](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108224810869.png)
 
 添加Git账户
 
-![image-20221108224709242](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108224709242.png)
+![image-20221108224709242](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108224709242.png)
 
 指定Jenkins从Git拉取代码目录
 
-![image-20221108224910785](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108224910785.png)
+![image-20221108224910785](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108224910785.png)
 
-![image-20221108224935821](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108224935821.png)
+![image-20221108224935821](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108224935821.png)
 
 指定Jenkins定时获取Git
 
@@ -54,13 +54,13 @@ ps aux | grep "nginx: worker process" | awk '{print $1}'
 
 意思是每2分钟检查Git是否有变化，如果有变化就会重新构建和部署
 
-![image-20221108225020629](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108225020629.png)
+![image-20221108225020629](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108225020629.png)
 
 构建步骤
 
 因为Jenkins在Windows环境下所以使用 Execute Windows batch command
 
-![image-20221108225404450](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108225404450.png)
+![image-20221108225404450](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108225404450.png)
 
 命令:
 
@@ -82,7 +82,7 @@ IIS服务器应用程序池必须为无代码托管
 
 为防止生产环境Swagger无法使用，需在构建后的文件夹中编辑web.conf文件
 
-![image-20221108230704528](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221108230704528.png)
+![image-20221108230704528](https://rustfs.wenyongdalucky.club:443/hexo/image-20221108230704528.png)
 
 添加如下代码
 
@@ -92,7 +92,7 @@ IIS服务器应用程序池必须为无代码托管
 </environmentVariables>
 ```
 
-![1668787835347](http://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/1668787835347.png)
+![1668787835347](https://rustfs.wenyongdalucky.club:443/hexo/1668787835347.png)
 
 在模块中删除WebDAVModule
 
@@ -102,7 +102,7 @@ IIS服务器应用程序池必须为无代码托管
 
 并在系统管理中 全局工具配置中配置NodeJS
 
-![image-20221122094753314](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122094753314.png)
+![image-20221122094753314](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122094753314.png)
 
 ## 部署.Net Core 至 Docker容器
 
@@ -130,7 +130,7 @@ pscp -r -l root -pw Wyd210213 C:\Users\Administrator\Documents\source\XiaoDaERP-
 
 配置NodeJS环境
 
-![image-20221122140826369](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122140826369.png)
+![image-20221122140826369](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122140826369.png)
 
 构建步骤
 
@@ -157,11 +157,11 @@ docker run --name xiaodablog -p 80:80 -p 443:443 -d --privileged=true -v /usr/lo
 
 增加参数化构建过程
 
-![image-20221122145043478](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122145043478.png)
+![image-20221122145043478](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122145043478.png)
 
 配置NodeJS环境
 
-![image-20221122145109235](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122145109235.png)
+![image-20221122145109235](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122145109235.png)
 
 构建过程
 
@@ -190,13 +190,13 @@ docker run --name xiaodaerpvbenvue -p 81:80 -p 444:443 -d --privileged=true -v /
 
 系统管理 -> 插件管理 安装`Matrix Authorization Strategy Plugin`插件
 
-![image-20221122174638567](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122174638567.png)
+![image-20221122174638567](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122174638567.png)
 
 授权策略选择`项目矩阵授权策略`
 
 分配以下权限
 
-![image-20221122174805834](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221122174805834.png)
+![image-20221122174805834](https://rustfs.wenyongdalucky.club:443/hexo/image-20221122174805834.png)
 
 ## Jenkins部署dotNet 6项目到远程Linux服务器上
 
@@ -204,21 +204,21 @@ docker run --name xiaodaerpvbenvue -p 81:80 -p 444:443 -d --privileged=true -v /
 
 安装好后 在 系统管理 -> 系统配置中设置`SSH Servers`
 
-![image-20221123095111849](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221123095111849.png)
+![image-20221123095111849](https://rustfs.wenyongdalucky.club:443/hexo/image-20221123095111849.png)
 
 并点击高级
 
-![image-20221123095205119](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221123095205119.png)
+![image-20221123095205119](https://rustfs.wenyongdalucky.club:443/hexo/image-20221123095205119.png)
 
 设置密码
 
 构建步骤
 
-![image-20221123095510632](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221123095510632.png)
+![image-20221123095510632](https://rustfs.wenyongdalucky.club:443/hexo/image-20221123095510632.png)
 
 因为是上传文件夹至远程服务器指定目录，如果文件夹中内容发生变化，比如文件名，文件夹需要进行删除操作，所以在发送文件前需要先执行远程Shell命令
 
-![image-20221130160623349](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221130160623349.png)
+![image-20221130160623349](https://rustfs.wenyongdalucky.club:443/hexo/image-20221130160623349.png)
 
 Exec command
 
@@ -230,7 +230,7 @@ rm -rf XiaodaERP/
 
 再进行上传文件夹部署操作
 
-![image-20221130160724401](https://markdownhexo.oss-cn-hangzhou.aliyuncs.com/img/image-20221130160724401.png)
+![image-20221130160724401](https://rustfs.wenyongdalucky.club:443/hexo/image-20221130160724401.png)
 
 Source files
 
