@@ -116,53 +116,48 @@ aside:
   button: true
   mobile: true
   position: right
-
-# 側邊欄卡片
-card_author:
-  enable: true
-  description: 热爱编程，热爱生活
-  button:
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
     enable: true
-    icon: fab fa-github
-    text: 关注我
-    link: https://github.com/wenyongda
-
-card_announcement:
-  enable: true
-  content: 欢迎来到我的博客，记录学习与生活～
-
-card_recent_post:
-  enable: true
-  limit: 5
-  sort: date
-  sort_order:
-  categories: true
-
-card_categories:
-  enable: true
-  limit: 8
-  expand: none
-  sort_order:
-
-card_tags:
-  enable: true
-  limit: 40
-  color: true
-  sort_order:
-
-card_archives:
-  enable: true
-  type: monthly
-  format: MMMM YYYY
-  order: -1
-  limit: 8
-  sort_order:
-
-card_webinfo:
-  enable: true
-  post_count: true
-  last_push_date: true
-  sort_order:
+    description: 热爱编程，热爱生活
+    button:
+      enable: true
+      icon: fab fa-github
+      text: 关注我
+      link: https://github.com/wenyongda
+  card_announcement:
+    enable: true
+    content: 欢迎来到我的博客，记录学习与生活～
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+    sort_order:
+  card_categories:
+    enable: true
+    limit: 8
+    expand: none
+    sort_order:
+  card_tags:
+    enable: true
+    limit: 40
+    color: true
+    sort_order:
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    order: -1
+    limit: 8
+    sort_order:
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    sort_order:
 
 # 目錄設置
 toc:
@@ -229,9 +224,9 @@ pjax:
   enable: true
   exclude:
 
-# social:
-#   fab fa-github: https://github.com/xxxxx || Github
-#   fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+social:
+  fab fa-github: https://github.com/wenyongda || GitHub || '#24292e'
+  fab fa-git-alt: https://gitee.com/wenyongda || Gitee || '#C71D23'
 wordcount:
   enable: true
 
