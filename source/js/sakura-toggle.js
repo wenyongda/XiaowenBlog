@@ -1,11 +1,11 @@
 // 樱花特效切换按钮 - 添加到 rightside 设置区域
 const SAKURA_STORAGE_KEY = 'sakura_effect_enabled';
 
-// 获取保存的状态，默认为 true（显示）
+// 获取保存的状态，默认为 false（关闭）
 function getSakuraState() {
   const saved = localStorage.getItem(SAKURA_STORAGE_KEY);
-  // 如果没有保存过，默认显示
-  return saved === null ? true : saved === 'true';
+  // 如果没有保存过，默认关闭
+  return saved === null ? false : saved === 'true';
 }
 
 // 保存状态到 localStorage
