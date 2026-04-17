@@ -994,6 +994,36 @@ Environment="JAVA_OPTS=-Djava.awt.headless=true -Duser.language=C.UTF-8"
 systemctl daemon-reload
 ```
 
+### 解决 Jenkins 无法拉取 TLS 1.0 的老旧 SVN 项目
+
+Java JDK 禁用了 TLS 1.0 协议，需修改 `java.security` 配置文件开启。
+
+找到启动 Jenkins 的 Java JDK 目录下的 `conf/security/java.security` 文件：
+
+```shell
+vim /etc/java-17-openjdk/conf/security/java.security
+```
+
+找到 `jdk.tls.disabledAlgorithms` 配置项，删除 `TLSv1`、`TLSv1.1`、`3DES_EDE_CBC`：
+
+```shell
+# 原配置：
+jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, DTLSv1.0, RC4, DES, \
+    MD5withRSA, DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+    ECDH
+
+# 修改为：
+jdk.tls.disabledAlgorithms=SSLv3, DTLSv1.0, RC4, DES, \
+    MD5withRSA, DH keySize < 1024, EC keySize < 224, anon, NULL, \
+    ECDH
+```
+
+保存后重启 Jenkins：
+
+```shell
+systemctl restart jenkins
+```
+
 ### 升级
 
 升级前备份配置文件：
