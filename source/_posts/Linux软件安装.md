@@ -1346,3 +1346,49 @@ read only = yes
 path = /root/mysql_bakup
 read only = yes
 ```
+
+---
+
+## Nginx 安装
+
+### 源码编译安装
+
+```shell
+tar -zxvf nginx-1.21.4.tar.gz
+cd nginx-1.21.4/
+./configure
+make
+make install
+```
+
+### AlmaLinux dnf 安装
+
+```shell
+# 确保软件是最新的
+sudo dnf clean all
+sudo dnf update
+sudo dnf groupinstall "Development Tools"
+
+# 安装
+sudo dnf install nginx
+
+# 启动并设置开机自启
+sudo systemctl restart nginx
+sudo systemctl status nginx
+sudo systemctl enable nginx
+
+# 防火墙放行 HTTP 和 HTTPS
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+```
+
+### 目录结构
+
+| 目录/文件 | 说明 |
+|----------|------|
+| `/etc/nginx` | 包含所有 Nginx 配置文件的主目录 |
+| `/etc/nginx/nginx.conf` | 主要的 Nginx 配置文件 |
+| `/etc/nginx/sites-available` | 定义各个网站的目录 |
+| `/etc/nginx/sites-enabled` | Nginx 积极服务的网站列表 |
+| `/var/log/nginx` | Nginx 日志目录 |
