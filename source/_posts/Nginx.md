@@ -5,6 +5,52 @@ tags: [Nginx, 反向代理, Web服务器, 负载均衡]
 categories: [运维, Web服务器]
 ---
 
+# Nginx 安装
+
+## 源码编译安装
+
+```shell
+tar -zxvf nginx-1.21.4.tar.gz
+cd nginx-1.21.4/
+./configure
+make
+make install
+```
+
+## AlmaLinux/RHEL 安装
+
+```shell
+# 确保软件是最新的
+sudo dnf clean all
+sudo dnf update
+sudo dnf groupinstall "Development Tools"
+
+# 安装 Nginx
+sudo dnf install nginx
+
+# 启动并设置开机自启
+sudo systemctl restart nginx
+sudo systemctl status nginx
+sudo systemctl enable nginx
+
+# 配置防火墙
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+```
+
+## 目录结构
+
+| 目录/文件 | 说明 |
+|-----------|------|
+| `/etc/nginx` | 包含所有 Nginx 配置文件的主目录 |
+| `/etc/nginx/nginx.conf` | 主要的 Nginx 配置文件 |
+| `/etc/nginx/sites-available` | 定义各个网站的目录 |
+| `/etc/nginx/sites-enabled` | Nginx 积极服务的网站列表 |
+| `/var/log/nginx` | Nginx 日志目录 |
+
+---
+
 ## Nginx 隐藏版本号
 
 nginx配置文件`nginx.conf`里增加 server_tokens off;

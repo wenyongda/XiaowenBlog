@@ -183,16 +183,121 @@ lspci | grep -i 'eth'
 ifconfig -a
 ```
 
+### 查看网络接口详细信息
+
+```shell
+ip link show
+```
+
 **输出示例**：
 
 ```
-docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 02:42:66:fe:52:a2  txqueuelen 0  (Ethernet)
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: em1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 2c:ea:7f:a9:fc:76 brd ff:ff:ff:ff:ff:ff
+```
 
-em1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.6.20  netmask 255.255.255.0  broadcast 192.168.6.255
-        ether 2c:ea:7f:a9:fc:76  txqueuelen 1000  (Ethernet)
+### 查看网络流量统计
+
+```shell
+cat /proc/net/dev
+```
+
+**输出示例**：
+
+```
+Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+   em1: 589404500 4189635    0 245895    0     0          0    966587 3040611778 3751409    0    0    0     0       0          0
+```
+
+### 查看网卡详细参数
+
+```shell
+ethtool em1
+```
+
+**输出示例**：
+
+```
+Settings for em1:
+        Supported ports: [ TP ]
+        Supported link modes:   10baseT/Half 10baseT/Full
+                                100baseT/Half 100baseT/Full
+                                1000baseT/Half 1000baseT/Full
+        Speed: 100Mb/s
+        Duplex: Full
+        Port: Twisted Pair
+        Auto-negotiation: on
+        Link detected: yes
+```
+
+---
+
+## PCI信息
+
+### 查看PCI设备
+
+```shell
+lspci
+```
+
+**输出示例**：
+
+```
+00:00.0 Host bridge: Intel Corporation Sky Lake-E DMI3 Registers (rev 07)
+00:14.0 USB controller: Intel Corporation C620 Series Chipset Family USB 3.0 xHCI Controller
+04:00.0 Ethernet controller: Broadcom NetXtreme BCM5720 2-port Gigabit Ethernet PCIe
+```
+
+### 查看详细信息
+
+```shell
+lspci -v    # 详细信息
+lspci -vv   # 更详细信息
+```
+
+### 查看设备树
+
+```shell
+lspci -t
+```
+
+---
+
+## USB信息
+
+### 查看USB设备
+
+```shell
+lsusb
+```
+
+**输出示例**：
+
+```
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+### 查看USB拓扑
+
+```shell
+lsusb -t
+```
+
+**输出示例**：
+
+```
+/:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/10p, 5000M
+/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/16p, 480M
+```
+
+### 查看详细信息
+
+```shell
+lsusb -v
 ```
 
 ---
