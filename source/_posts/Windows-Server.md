@@ -135,4 +135,151 @@ irm https://massgrave.dev/get | iex
   - **注意：** `-o` 后面直接跟目标文件夹的完整路径，不带 `*`。
 - `"source\repos\ruoyi-ai\*"`: 这是**压缩包内部想要解压的目录名称**。请确保这个名称与压缩包内的实际目录名完全一致（大小写敏感）。
 
+# Shawl - Windows 服务封装工具
+
+Shawl 是一个用 Rust 编写的 Windows 服务封装工具，可以将任意程序转换为 Windows 服务运行。
+
+## 安装方式
+
+### 下载预编译版本
+
+从 [GitHub Releases](https://github.com/mtkennerly/shawl/releases) 下载可执行文件，放置到任意目录即可使用。
+
+### Scoop 安装
+
+```powershell
+scoop bucket add extras
+scoop install shawl
+```
+
+### Winget 安装
+
+```powershell
+winget install -e --id mtkennerly.shawl
+```
+
+### Cargo 安装（需要 Rust 环境）
+
+```powershell
+cargo install --locked shawl
+```
+
+## 基本使用
+
+### 创建服务
+
+使用 Shawl 的 `add` 命令创建服务（`--` 分隔 Shawl 参数和要运行的命令）：
+
+```powershell
+shawl add --name my-app -- C:/path/my-app.exe
+```
+
+使用 Windows `sc` 命令创建（更精细控制）：
+
+```powershell
+sc create my-app binPath= "C:/path/shawl.exe run --name my-app -- C:/path/my-app.exe"
+```
+
+### 配置服务
+
+```powershell
+# 设置自动启动
+sc config my-app start= auto
+
+# 启动服务
+sc start my-app
+
+# 停止服务
+sc stop my-app
+
+# 删除服务
+sc delete my-app
+```
+
+## 重启策略配置
+
+Shawl 默认在程序非零退出码时自动重启，可通过参数自定义：
+
+```powershell
+# 始终重启（适合关键服务）
+shawl add --name my-service --restart -- C:/app/myapp.exe
+
+# 永不重启
+shawl add --name my-service --no-restart -- C:/app/myapp.exe
+
+# 仅特定退出码时重启（如 1, 2, 3）
+shawl add --name my-service --restart-if 1,2,3 -- C:/app/myapp.exe
+
+# 除特定退出码外都重启（如排除成功码 0）
+shawl add --name my-service --restart-if-not 0 -- C:/app/myapp.exe
+```
+
+## 常用参数
+
+| 参数 | 说明 |
+|------|------|
+| `--name <name>` | 服务名称 |
+| `--cwd <dir>` | 设置工作目录（默认为 `C:\Windows\System32`） |
+| `--stop-timeout <ms>` | 停止等待时间，默认 3000 毫秒 |
+| `--no-log` | 禁用所有日志 |
+| `--no-log-cmd` | 禁用命令输出日志 |
+| `--pass <code>` | 将指定退出码视为成功而非错误 |
+
+## 设置服务账户
+
+默认服务以 Local System 账户运行（权限较高）。建议使用 Network Service 等受限账户：
+
+```powershell
+# 先授予 Network Service 对 Shawl 目录的读写执行权限
+# 然后配置服务账户
+sc config my-app obj= "NT AUTHORITY\Network Service" password= ""
+```
+
+## 日志位置
+
+Shawl 在其所在目录生成日志文件：`shawl_for_<服务名>_*.log`
+
+默认日志限制：单文件最大 2MB，保留 2 个轮转副本。
+
+## 与 WinSW/NSSM 的区别
+
+Shawl 不需要特殊的安装命令来准备服务，可以直接通过 MSI 的 `ServiceInstall` 或 `sc create` 配置，更适合自动化部署场景。
+
+## 实际示例：SSH SOCKS 代理服务
+
+将 SSH 动态端口转发（SOCKS 代理）配置为 Windows 服务：
+
+```powershell
+C:\tools\shawl.exe add --name "SSH_SOCKS_Proxy" -- `
+  "C:\Windows\System32\OpenSSH\ssh.exe" `
+  -i "C:\ProgramData\SSH_Shawl\id_rsa" `
+  -D 1080 `
+  -N `
+  -o ServerAliveInterval=60 `
+  -o ServerAliveCountMax=3 `
+  -o StrictHostKeyChecking=no `
+  root@42.93.8.7
+```
+
+**参数说明：**
+
+| 参数 | 说明 |
+|------|------|
+| `-i "id_rsa"` | 指定私钥文件路径（免密登录） |
+| `-D 1080` | 在本地 1080 端口开启 SOCKS 代理 |
+| `-N` | 不执行远程命令，仅建立连接 |
+| `ServerAliveInterval=60` | 每 60 秒发送心跳保活 |
+| `ServerAliveCountMax=3` | 3 次心跳无响应则断开 |
+| `StrictHostKeyChecking=no` | 自动接受新主机密钥 |
+
+**启动服务：**
+
+```powershell
+sc start SSH_SOCKS_Proxy
+```
+
+**使用代理：**
+
+配置浏览器或应用程序使用 `127.0.0.1:1080` 作为 SOCKS5 代理即可。
+
 # Windows Server 2019
