@@ -139,6 +139,8 @@ irm https://massgrave.dev/get | iex
 
 Shawl 是一个用 Rust 编写的 Windows 服务封装工具，可以将任意程序转换为 Windows 服务运行。
 
+> **兼容性说明：** Shawl 依赖较新的 Windows API，**不兼容 Windows Server 2008 R2**。如果你的服务器是 2008 R2，建议使用 [NSSM](#nssm---windows-服务封装工具gui-方式)。
+
 ## 安装方式
 
 ### 下载预编译版本
@@ -216,14 +218,14 @@ shawl add --name my-service --restart-if-not 0 -- C:/app/myapp.exe
 
 ## 常用参数
 
-| 参数 | 说明 |
-|------|------|
-| `--name <name>` | 服务名称 |
-| `--cwd <dir>` | 设置工作目录（默认为 `C:\Windows\System32`） |
-| `--stop-timeout <ms>` | 停止等待时间，默认 3000 毫秒 |
-| `--no-log` | 禁用所有日志 |
-| `--no-log-cmd` | 禁用命令输出日志 |
-| `--pass <code>` | 将指定退出码视为成功而非错误 |
+| 参数                  | 说明                                         |
+| --------------------- | -------------------------------------------- |
+| `--name <name>`       | 服务名称                                     |
+| `--cwd <dir>`         | 设置工作目录（默认为 `C:\Windows\System32`） |
+| `--stop-timeout <ms>` | 停止等待时间，默认 3000 毫秒                 |
+| `--no-log`            | 禁用所有日志                                 |
+| `--no-log-cmd`        | 禁用命令输出日志                             |
+| `--pass <code>`       | 将指定退出码视为成功而非错误                 |
 
 ## 设置服务账户
 
@@ -263,23 +265,140 @@ C:\tools\shawl.exe add --name "SSH_SOCKS_Proxy" -- `
 
 **参数说明：**
 
-| 参数 | 说明 |
-|------|------|
-| `-i "id_rsa"` | 指定私钥文件路径（免密登录） |
-| `-D 1080` | 在本地 1080 端口开启 SOCKS 代理 |
-| `-N` | 不执行远程命令，仅建立连接 |
-| `ServerAliveInterval=60` | 每 60 秒发送心跳保活 |
-| `ServerAliveCountMax=3` | 3 次心跳无响应则断开 |
-| `StrictHostKeyChecking=no` | 自动接受新主机密钥 |
+| 参数                       | 说明                            |
+| -------------------------- | ------------------------------- |
+| `-i "id_rsa"`              | 指定私钥文件路径（免密登录）    |
+| `-D 1080`                  | 在本地 1080 端口开启 SOCKS 代理 |
+| `-N`                       | 不执行远程命令，仅建立连接      |
+| `ServerAliveInterval=60`   | 每 60 秒发送心跳保活            |
+| `ServerAliveCountMax=3`    | 3 次心跳无响应则断开            |
+| `StrictHostKeyChecking=no` | 自动接受新主机密钥              |
 
-**启动服务：**
+将 Nginx 1.25.2 配置为 Windows 服务：
 
 ```powershell
-sc start SSH_SOCKS_Proxy
+C:\tools\shawl.exe add `
+  --name "Nginx 1.25.2" `
+  --cwd "D:\Program Files (x86)\nginx-1.25.2" `
+  --log-dir "D:\Program Files (x86)\nginx-1.25.2\logs" `
+  --restart `
+  --kill-process-tree `
+  --stop-timeout 5000 `
+  -- `
+  nginx.exe
 ```
 
-**使用代理：**
+**参数说明：**
 
-配置浏览器或应用程序使用 `127.0.0.1:1080` 作为 SOCKS5 代理即可。
+| 参数                    | 说明                                                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `--name "Nginx 1.25.2"` | 服务名称（可自定义）                                                                                             |
+| `--cwd <dir>`           | 设置 Nginx 工作目录为其安装目录，确保 nginx.exe 能正确读取配置文件与日志路径                                     |
+| `--log-dir <dir>`       | **日志输出目录（不是文件路径）。** 将 Shawl 日志输出到指定目录，Shawl 会自动生成 `shawl_for_<服务名>_*.log` 文件 |
+| `--restart`             | Nginx 进程退出时自动重启，确保持续运行                                                                           |
+| `--kill-process-tree`   | 停止服务时终止整个进程树，防止残留子进程（如 nginx worker 进程未被完全关闭）                                     |
+| `--stop-timeout <ms>`   | 等待 Nginx 优雅退出的超时时间（5000 毫秒），超时后强制终止                                                       |
+| `--`                    | 分隔符，分隔 Shawl 自身参数与要运行的命令                                                                        |
+| `nginx.exe`             | Shawl 托管运行的 Nginx 可执行文件                                                                                |
 
-# Windows Server 2019
+由于 Shawl 通过 `sc` 注册服务时，服务名中不能包含空格。如直接运行会报错 `The parameter is incorrect`。因此推荐先通过 `shawl add` 创建服务（期间会要求以管理员身份运行），然后通过 `sc` 管理：
+
+```powershell
+# 启动服务
+sc start "Nginx 1.25.2"
+
+# 停止服务
+sc stop "Nginx 1.25.2"
+
+# 设置开机自启
+sc config "Nginx 1.25.2" start= auto
+
+# 删除服务
+sc delete "Nginx 1.25.2"
+```
+
+> **注意：** 如果通过 `sc create` 直接注册，请使用 `binPath=` 且 `--name` 值中避免空格；或使用 `shawl add` 创建（它会处理好这些问题）。
+
+# NSSM - Windows 服务封装工具（GUI 方式）
+
+[NSSM (Non-Sucking Service Manager)](https://nssm.cc) 是一个老牌的 Windows 服务封装工具，提供图形界面操作，适合不熟悉命令行的场景。兼容性极好，**Windows Server 2008 R2 及更高版本均可使用**。
+
+> 注：原 nssm.cc 已停止维护，推荐使用社区维护分支 [fawno/nssm.cc](https://github.com/fawno/nssm.cc)。
+
+## 下载
+
+- 下载地址：[https://github.com/fawno/nssm.cc/releases/tag/v2.24.1](https://github.com/fawno/nssm.cc/releases/tag/v2.24.1)
+- 下载 `nssm-2.24.1.zip`，解压后根据系统架构选择 `win32/nssm.exe` 或 `win64/nssm.exe`
+
+## 使用步骤
+
+将 nginx.exe 注册为 Windows 服务并配置自动重启：
+
+```bat
+:: 1. 解压到固定目录
+:: 例如：D:\tools\nssm-2.24\win64\nssm.exe
+
+:: 2. 以管理员身份打开 CMD，注册 Nginx 服务
+D:\tools\nssm-2.24\win64\nssm.exe install "Nginx 1.29.8"
+
+:: 3. 在弹出的 GUI 界面填写：
+::    - Application → Path: D:\Program Files (x86)\nginx-1.29.8\nginx.exe
+::    - Application → Startup directory: D:\Program Files (x86)\nginx-1.29.8
+::    - Details → Display name: Nginx 1.29.8
+::    - Details → Description: Nginx 1.29.8 via NSSM (Win2008R2)
+::    - Shutdown → Console control handler: 勾选
+::    - Exit actions → Restart on failure: 勾选
+
+:: 4. 点击 "Install service" 完成注册
+
+:: 5. 启动服务
+sc start "Nginx 1.29.8"
+```
+
+**GUI 字段说明：**
+
+| 区域         | 字段                    | 说明                                                                    |
+| ------------ | ----------------------- | ----------------------------------------------------------------------- |
+| Application  | Path                    | nginx.exe 可执行文件路径                                                |
+| Application  | Startup directory       | Nginx 工作目录（确保读取配置、日志路径正确）                            |
+| Details      | Display name            | 服务列表中显示的名称（如 `Nginx 1.29.8`），仅用于标识，不影响 `sc` 命令 |
+| Details      | Description             | 服务描述信息                                                            |
+| Shutdown     | Console control handler | 勾选后 NSSM 通过 Ctrl+C 信号优雅关闭 nginx，而非直接杀进程              |
+| Exit actions | Restart on failure      | 进程异常退出时自动重启                                                  |
+
+> **Service Name 与 Display Name 的区别：**
+>
+> - **Service Name**（`Nginx 1.29.8`）— 即 `nssm.exe install "Nginx 1.29.8"` 中指定的名称，是服务的**系统标识**，用于 `sc start/stop/config/delete` 等命令操作。Windows 不允许存在两个同名 Service Name。
+> - **Display Name**（`Nginx 1.29.8`）— 仅在 `services.msc` 服务管理器中显示，纯展示用途，可包含空格和中文。多个服务可以有相同的 Display Name（但不建议）。
+>
+> 简单来说：`sc` 命令认的是 Service Name，服务列表界面看到的是 Display Name。
+
+## 服务管理命令
+
+```bat
+:: 启动
+sc start "Nginx 1.29.8"
+
+:: 停止
+sc stop "Nginx 1.29.8"
+
+:: 设置开机自启
+sc config "Nginx 1.29.8" start= auto
+
+:: 删除服务（需先停止）
+sc delete "Nginx 1.29.8"
+
+:: 如要修改配置，重新运行 install 命令即可（会弹出 GUI 编辑）
+D:\tools\nssm-2.24\win64\nssm.exe install "Nginx 1.29.8"
+```
+
+## NSSM vs Shawl
+
+| 对比项     | NSSM                      | Shawl                             |
+| ---------- | ------------------------- | --------------------------------- |
+| 操作方式   | 提供 GUI 界面，也可命令行 | 纯命令行                          |
+| 配置修改   | 重新运行 install 编辑     | 需删除服务重新添加                |
+| 日志管理   | 内置日志重定向到文件      | 自动生成 `shawl_for_<name>_*.log` |
+| 进程树清理 | 默认处理子进程            | 需显式指定 `--kill-process-tree`  |
+| 最小系统   | Windows Server 2008 R2+    | Windows 10 / Server 2012 R2+      |
+| 适用场景   | 运维人员手动配置          | 自动化部署脚本                    |
