@@ -580,6 +580,27 @@ robocopy %USERPROFILE%\.gradle D:\packages\gradle /E
 
 ## 使用链接迁移包缓存
 
+### 获取缓存默认目录
+
+```powershell
+# npm 缓存目录
+npm config get cache
+
+# yarn 缓存目录
+yarn cache dir
+
+# pnpm 缓存目录
+pnpm store path
+
+# NuGet 全局包目录
+dotnet nuget locals global-packages -l
+
+# pip 缓存目录
+pip cache dir
+```
+
+### 使用 Junction/Symlink 迁移
+
 除了设置环境变量外，还可以使用 **目录联接 (Junction)** 或 **符号链接 (Symlink)** 将缓存目录迁移到开发驱动器，同时保持原有路径不变。
 
 > **优势：** 无需修改环境变量，对应用程序完全透明，兼容性更好。
@@ -678,6 +699,25 @@ Get-Item "C:\Users\你的用户名\.pnpm-store" | Select-Object FullName, LinkTy
 
 # 或使用 dir 命令
 cmd /c dir "C:\Users\你的用户名" /AL
+
+# 查看目录是否为链接（Junction/Symlink）
+(Get-Item "C:\Users\你的用户名\.pnpm-store").Attributes -match "ReparsePoint"
+
+# 批量检查常用缓存目录是否为链接
+@(
+  "$env:USERPROFILE\.pnpm-store",
+  "$env:USERPROFILE\AppData\Local\JetBrains",
+  "$env:USERPROFILE\AppData\Local\npm-cache",
+  "$env:USERPROFILE\.nuget\packages",
+  "$env:USERPROFILE\AppData\Local\pip\Cache"
+) | ForEach-Object {
+    $item = Get-Item $_ -ErrorAction SilentlyContinue
+    [PSCustomObject]@{
+        Path = $_
+        IsLink = ($item.Attributes -match "ReparsePoint")
+        Target = $item.Target
+    }
+}
 ```
 
 ## 限制与注意事项
