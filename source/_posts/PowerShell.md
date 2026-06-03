@@ -5,7 +5,9 @@ tags: [PowerShell, Windows, Shell, 命令行]
 categories: [开发工具, Windows]
 ---
 
-# PowerShell 7 使用 Oh My Posh 来美化命令行
+# PowerShell 7 提示符美化
+
+> PowerShell 有两个主流的提示符美化工具：[Oh My Posh](https://ohmyposh.dev/) 和 [Starship](https://starship.dev/)，二者选其一即可。
 
 ## 安装 PowerShell 7
 
@@ -38,9 +40,11 @@ winget install --id Microsoft.PowerShell --source winget
 winget install --id Microsoft.PowerShell.Preview --source winget
 ```
 
-## 安装 Oh My Posh
+## Oh My Posh
 
 官方文档地址：https://ohmyposh.dev/
+
+### 安装
 
 最好在管理员模式下运行 `powershell`
 
@@ -89,143 +93,17 @@ notepad $Profile
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/montys.omp.json" | Invoke-Expression
 ```
 
-## 扩展模块
+## Starship
 
-### PowerShellGet
+[Starship](https://starship.dev/) 是跨平台的提示符工具，支持 Windows、Linux、macOS。与 Oh My Posh 功能类似，二者选其一即可。
 
-> [PowerShellGet](https://github.com/PowerShell/PowerShellGet) 是 Windows 平台上的包管理器，主要用于管理 PowerShell 模块，但也支持其他类型的包。
-
-以系统管理员权限打开**PowerShell**终端，执行以下命令：
-
-```powershell
-Install-Module -Name PowerShellGet -Force
-```
-
-### [posh-git](https://github.com/dahlbyk/posh-git)
-
-> [posh-git](https://github.com/dahlbyk/posh-git)是一款用于 Windows 系统的 PowerShell 扩展模块，它主要为 Git 提供了更加丰富且人性化的命令行界面体验。
-
-以系统管理员权限打开**PowerShell**终端，执行以下命令：
-
-```powershell
-PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
-```
-
-### [PSReadLine](https://github.com/PowerShell/PSReadLine)
-
-> [PSReadLine](https://github.com/PowerShell/PSReadLine)用于增强命令行编辑体验的模块，提供语法高亮/命令预测/历史记录管理以及提供了丰富的快捷键和编辑命令。
-
-以系统管理员权限打开**PowerShell**终端，执行以下命令：
-
-```powershell
-Install-Module PSReadLine -Force
-```
-
-### [PSFzf](https://github.com/kelleymaureen/PSFzf)
-
-> [PSFzf](https://github.com/kelleymaureen/PSFzf) 是 fzf 的 PowerShell 集成模块，提供模糊搜索历史命令和文件功能。
-
-```powershell
-# 安装 PSFzf 模块
-Install-Module PSFzf -Scope CurrentUser -Force
-
-# 安装 fzf 本体（PSFzf 的底层依赖）
-winget install junegunn.fzf
-```
-
-## 终端增强配置（Starship + PSReadLine）
-
-> 参考：[PowerShell 终端增强配置指南](https://mp.weixin.qq.com/s/DV-T4Tr4KaonFdgutuzhQQ)
-
-### 前置准备
-
-#### 确认 PowerShell 版本
-
-```powershell
-$PSVersionTable.PSVersion
-```
-
-- 主版本号为 `5` → 使用 **PS5.1 方案**
-- 主版本号为 `7` → 使用 **PS7+ 方案**
-
-#### 确认 Profile 文件路径
-
-```powershell
-# 查看路径
-echo $PROFILE
-
-# 若文件不存在则创建
-if (!(Test-Path $PROFILE)) {
-    New-Item -ItemType File -Path $PROFILE -Force
-}
-
-# 用 VSCode 打开编辑
-code $PROFILE
-```
-
-> PS5.1 的 Profile 路径通常为：`C:\Users\<用户名>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
->
-> PS7+ 的 Profile 路径通常为：`C:\Users\<用户名>\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
->
-> 两个版本的 Profile **互相独立**，需分别配置。
-
-#### 设置执行策略（如遇权限报错）
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-### 一次性安装依赖
-
-#### PowerShell 7+ 安装依赖
-
-```powershell
-# 1. 信任 PSGallery
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-
-# 2. 安装最新版 PSReadLine
-Install-Module PSReadLine -Force -Scope CurrentUser
-
-# 3. 安装 posh-git
-Install-Module posh-git -Scope CurrentUser -Force
-
-# 4. 安装 PSFzf
-Install-Module PSFzf -Scope CurrentUser -Force
-
-# 5. 安装 fzf 本体
-winget install junegunn.fzf
-```
-
-#### PowerShell 5.1 安装依赖
-
-```powershell
-# 1. 信任 PSGallery
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-
-# 2. 安装 PSReadLine（PS5.1 最高兼容 2.3.x，必须指定版本）
-Install-Module PSReadLine -RequiredVersion 2.3.4 -Force -Scope CurrentUser -SkipPublisherCheck
-
-# 3. 安装 posh-git
-Install-Module posh-git -Scope CurrentUser -Force
-
-# 4. 安装 PSFzf
-Install-Module PSFzf -Scope CurrentUser -Force
-
-# 5. 安装 fzf 本体
-winget install junegunn.fzf
-```
-
-### Starship 配置
-
-Starship 是跨平台的提示符工具，支持 Windows、Linux、macOS。
-
-#### 安装 Starship
+### 安装
 
 ```powershell
 winget install --id Starship.Starship
 ```
 
-#### 配置文件位置
+### 配置文件位置
 
 Windows 下配置文件路径：`~/.config/starship.toml`
 
@@ -238,7 +116,16 @@ New-Item -Path ~/.config/starship.toml -ItemType File -Force
 code ~/.config/starship.toml
 ```
 
-#### 完整配置（Catppuccin Mocha 主题）
+### 初始化
+
+在 `$PROFILE` 文件中添加：
+
+```powershell
+# Starship 初始化（必须放最后）
+Invoke-Expression (&starship init powershell)
+```
+
+### 完整配置（Catppuccin Mocha 主题）
 
 将以下内容粘贴到 `starship.toml` 文件中：
 
@@ -530,7 +417,7 @@ mantle = "#1e2030"
 crust = "#181926"
 ```
 
-#### 切换主题
+### 切换主题
 
 修改 `palette` 字段即可切换主题：
 
@@ -539,7 +426,7 @@ crust = "#181926"
 palette = 'catppuccin_mocha'
 ```
 
-#### 验证配置
+### 验证配置
 
 ```powershell
 # 检查 Starship 版本
@@ -547,6 +434,132 @@ starship --version
 
 # 测试配置是否正确
 starship config
+```
+
+## 扩展模块
+
+### PowerShellGet
+
+> [PowerShellGet](https://github.com/PowerShell/PowerShellGet) 是 Windows 平台上的包管理器，主要用于管理 PowerShell 模块，但也支持其他类型的包。
+
+以系统管理员权限打开**PowerShell**终端，执行以下命令：
+
+```powershell
+Install-Module -Name PowerShellGet -Force
+```
+
+### [posh-git](https://github.com/dahlbyk/posh-git)
+
+> [posh-git](https://github.com/dahlbyk/posh-git)是一款用于 Windows 系统的 PowerShell 扩展模块，它主要为 Git 提供了更加丰富且人性化的命令行界面体验。
+
+以系统管理员权限打开**PowerShell**终端，执行以下命令：
+
+```powershell
+PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
+```
+
+### [PSReadLine](https://github.com/PowerShell/PSReadLine)
+
+> [PSReadLine](https://github.com/PowerShell/PSReadLine)用于增强命令行编辑体验的模块，提供语法高亮/命令预测/历史记录管理以及提供了丰富的快捷键和编辑命令。
+
+以系统管理员权限打开**PowerShell**终端，执行以下命令：
+
+```powershell
+Install-Module PSReadLine -Force
+```
+
+### [PSFzf](https://github.com/kelleymaureen/PSFzf)
+
+> [PSFzf](https://github.com/kelleymaureen/PSFzf) 是 fzf 的 PowerShell 集成模块，提供模糊搜索历史命令和文件功能。
+
+```powershell
+# 安装 PSFzf 模块
+Install-Module PSFzf -Scope CurrentUser -Force
+
+# 安装 fzf 本体（PSFzf 的底层依赖）
+winget install junegunn.fzf
+```
+
+## 终端增强配置（PSReadLine + PSFzf）
+
+> 参考：[PowerShell 终端增强配置指南](https://mp.weixin.qq.com/s/DV-T4Tr4KaonFdgutuzhQQ)
+
+### 前置准备
+
+#### 确认 PowerShell 版本
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+- 主版本号为 `5` → 使用 **PS5.1 方案**
+- 主版本号为 `7` → 使用 **PS7+ 方案**
+
+#### 确认 Profile 文件路径
+
+```powershell
+# 查看路径
+echo $PROFILE
+
+# 若文件不存在则创建
+if (!(Test-Path $PROFILE)) {
+    New-Item -ItemType File -Path $PROFILE -Force
+}
+
+# 用 VSCode 打开编辑
+code $PROFILE
+```
+
+> PS5.1 的 Profile 路径通常为：`C:\Users\<用户名>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+>
+> PS7+ 的 Profile 路径通常为：`C:\Users\<用户名>\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+>
+> 两个版本的 Profile **互相独立**，需分别配置。
+
+#### 设置执行策略（如遇权限报错）
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### 一次性安装依赖
+
+#### PowerShell 7+ 安装依赖
+
+```powershell
+# 1. 信任 PSGallery
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+# 2. 安装最新版 PSReadLine
+Install-Module PSReadLine -Force -Scope CurrentUser
+
+# 3. 安装 posh-git
+Install-Module posh-git -Scope CurrentUser -Force
+
+# 4. 安装 PSFzf
+Install-Module PSFzf -Scope CurrentUser -Force
+
+# 5. 安装 fzf 本体
+winget install junegunn.fzf
+```
+
+#### PowerShell 5.1 安装依赖
+
+```powershell
+# 1. 信任 PSGallery
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+# 2. 安装 PSReadLine（PS5.1 最高兼容 2.3.x，必须指定版本）
+Install-Module PSReadLine -RequiredVersion 2.3.4 -Force -Scope CurrentUser -SkipPublisherCheck
+
+# 3. 安装 posh-git
+Install-Module posh-git -Scope CurrentUser -Force
+
+# 4. 安装 PSFzf
+Install-Module PSFzf -Scope CurrentUser -Force
+
+# 5. 安装 fzf 本体
+winget install junegunn.fzf
 ```
 
 ### 完整 Profile 配置
