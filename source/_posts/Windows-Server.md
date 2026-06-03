@@ -402,3 +402,308 @@ D:\tools\nssm-2.24\win64\nssm.exe install "Nginx 1.29.8"
 | 进程树清理 | 默认处理子进程            | 需显式指定 `--kill-process-tree`  |
 | 最小系统   | Windows Server 2008 R2+    | Windows 10 / Server 2012 R2+      |
 | 适用场景   | 运维人员手动配置          | 自动化部署脚本                    |
+
+# 开发驱动器 (Dev Drive)
+
+开发驱动器是 Windows 11 提供的一种新存储卷形式，基于 ReFS (Resilient File System) 技术构建，针对开发工作负载进行了文件系统优化，可显著提升编译、包恢复等开发操作的性能。
+
+> **适用场景：** 源代码仓库、包缓存（npm/NuGet/pip/Cargo 等）、构建输出和中间文件。
+
+## 先决条件
+
+- Windows 11 版本 10.0.22621.2338 或更高版本
+- 建议 16 GB 内存（至少 8 GB，ReFS 比 NTFS 占用更多内存）
+- 最小 50 GB 可用磁盘空间
+- 本地管理员权限
+
+> **注意：** 不能将 C: 驱动器指定为开发驱动器。开发人员工具（如 Visual Studio、.NET SDK）应保留在 C: 盘。
+
+## 创建方式
+
+### 方式一：通过 Windows 设置
+
+1. 打开 **设置 > 系统 > 存储 > 高级存储设置 > 磁盘和卷**
+2. 选择 **创建开发人员驱动器**
+3. 选择创建方式：
+   - **创建新的 VHD**：在虚拟硬盘上创建（推荐，灵活易管理）
+   - **调整现有卷的大小**：从现有分区划分空间
+   - **使用未分配空间**：利用磁盘上已有的未分配空间
+
+### 方式二：通过命令行
+
+以管理员身份运行：
+
+```powershell
+# 使用 Format 命令
+Format D: /DevDrv /Q
+
+# 或使用 PowerShell
+Format-Volume -DriveLetter D -DevDrive
+```
+
+> 将 `D:` 替换为实际驱动器号。
+
+## 磁盘分区 vs VHD
+
+| 对比项     | 磁盘分区               | VHD（推荐）                     |
+| ---------- | ---------------------- | ------------------------------- |
+| 性能       | 更快（直接访问物理磁盘）| 略有开销（虚拟磁盘层）          |
+| 灵活性     | 调整大小复杂且风险大   | 支持动态扩展，易于管理          |
+| 可移植性   | 与物理磁盘绑定         | VHD 文件可复制、移动、备份      |
+| 适用场景   | 追求极致性能           | 需要灵活管理或多设备使用        |
+
+## 信任与安全性
+
+开发驱动器默认使用 Microsoft Defender **性能模式**，在安全性和性能之间取得平衡。
+
+### 设置为受信任驱动器
+
+受信任的驱动器启用性能模式（推荐），不受信任的驱动器使用实时保护模式（性能较低）。
+
+```powershell
+# 以管理员身份运行 PowerShell
+
+# 设置为受信任
+fsutil devdrv trust D:
+
+# 查询信任状态
+fsutil devdrv query D:
+```
+
+> **重要：** 将开发驱动器移动到其他计算机后，需要重新设置信任。
+
+### 防病毒筛选器配置
+
+```powershell
+# 允许特定筛选器（适用于所有开发驱动器）
+fsutil devdrv setfiltersallowed "Filter-01, Filter-02"
+
+# 禁用防病毒筛选器（不推荐，存在安全风险）
+fsutil devdrv enable /disallowAv
+
+# 重新启用防病毒筛选器
+fsutil devdrv enable /allowAv
+```
+
+### 常用筛选器列表
+
+| 场景                           | 筛选器名称                                    |
+| ------------------------------ | --------------------------------------------- |
+| Docker 容器                    | `bindFlt`, `wcifs`                            |
+| Windows Defender               | `WdFilter`（默认附加）                        |
+| Microsoft Defender for Endpoint | `MsSecFlt`                                    |
+| GVFS (Git 虚拟文件系统)        | `PrjFlt`                                      |
+| 进程监视器 (ProcMon)           | `ProcMon24`                                   |
+| Windows 升级                   | `WinSetupMon`（若 TEMP 在开发驱动器上则需要） |
+
+## 包缓存迁移
+
+将常用包缓存迁移到开发驱动器以获得最佳性能：
+
+### npm (Node.js)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\npm
+
+# 设置环境变量
+setx /M npm_config_cache D:\packages\npm
+
+# 迁移现有缓存（如已安装）
+robocopy %AppData%\npm-cache D:\packages\npm /E
+```
+
+### NuGet (.NET)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\nuget
+
+# 设置环境变量
+setx /M NUGET_PACKAGES D:\packages\nuget
+
+# 验证设置
+dotnet nuget locals global-packages --list
+```
+
+### pip (Python)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\pip
+
+# 设置环境变量
+setx /M PIP_CACHE_DIR D:\packages\pip
+
+# 迁移现有缓存
+robocopy %LocalAppData%\pip\Cache D:\packages\pip /E
+```
+
+### Cargo (Rust)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\cargo
+
+# 设置环境变量
+setx /M CARGO_HOME D:\packages\cargo
+
+# 迁移现有缓存
+robocopy %USERPROFILE%\.cargo D:\packages\cargo /E
+```
+
+### Maven (Java)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\maven
+
+# 设置环境变量
+setx /M MAVEN_OPTS "-Dmaven.repo.local=D:\packages\maven"
+
+# 迁移现有缓存
+robocopy %USERPROFILE%\.m2\repository D:\packages\maven /E
+```
+
+### Gradle (Java)
+
+```powershell
+# 创建缓存目录
+mkdir D:\packages\gradle
+
+# 设置环境变量
+setx /M GRADLE_USER_HOME D:\packages\gradle
+
+# 迁移现有缓存
+robocopy %USERPROFILE%\.gradle D:\packages\gradle /E
+```
+
+## 使用链接迁移包缓存
+
+除了设置环境变量外，还可以使用 **目录联接 (Junction)** 或 **符号链接 (Symlink)** 将缓存目录迁移到开发驱动器，同时保持原有路径不变。
+
+> **优势：** 无需修改环境变量，对应用程序完全透明，兼容性更好。
+
+### 操作步骤
+
+1. **迁移现有缓存**：使用 `robocopy` 将原目录内容移动到开发驱动器
+2. **创建链接**：在原位置创建指向新位置的 Junction/Symlink
+
+### pnpm 缓存
+
+```powershell
+# 迁移 pnpm 全局存储
+robocopy "C:\Users\你的用户名\.pnpm-store" "D:\Caches\.pnpm-store" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "C:\Users\你的用户名\.pnpm-store" -Target "D:\Caches\.pnpm-store"
+```
+
+### JetBrains 缓存
+
+```powershell
+# 迁移 JetBrains 缓存（IDE 配置、索引等）
+robocopy "C:\Users\你的用户名\AppData\Local\JetBrains" "D:\Caches\JetBrains" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "C:\Users\你的用户名\AppData\Local\JetBrains" -Target "D:\Caches\JetBrains"
+```
+
+### npm 缓存
+
+```powershell
+# 迁移 npm 缓存
+robocopy "C:\Users\你的用户名\AppData\Local\npm-cache" "D:\Caches\npm-cache" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "C:\Users\你的用户名\AppData\Local\npm-cache" -Target "D:\Caches\npm-cache"
+```
+
+### NuGet 缓存
+
+```powershell
+# 迁移 NuGet 全局包
+robocopy "C:\Users\你的用户名\.nuget\packages" "D:\Caches\nuget-packages" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "C:\Users\你的用户名\.nuget\packages" -Target "D:\Caches\nuget-packages"
+```
+
+### pip 缓存
+
+```powershell
+# 迁移 pip 缓存
+robocopy "C:\Users\你的用户名\AppData\Local\pip\Cache" "D:\Caches\pip-cache" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "C:\Users\你的用户名\AppData\Local\pip\Cache" -Target "D:\Caches\pip-cache"
+```
+
+### TEMP 目录
+
+```powershell
+# 迁移临时文件目录（可选，需添加 WinSetupMon 筛选器）
+robocopy "$env:TEMP" "D:\Caches\TEMP" /E /MOVE /R:3 /W:10
+
+# 创建目录联接
+New-Item -ItemType Junction -Path "$env:TEMP" -Target "D:\Caches\TEMP"
+
+# 添加 Windows 升级所需的筛选器
+fsutil devdrv setfiltersallowed WinSetupMon
+```
+
+### robocopy 参数说明
+
+| 参数    | 说明                                   |
+| ------- | -------------------------------------- |
+| `/E`    | 复制子目录，包括空目录                 |
+| `/MOVE` | 移动文件和目录（复制后删除源）         |
+| `/R:3`  | 失败时重试 3 次                        |
+| `/W:10` | 重试之间等待 10 秒                     |
+
+### Junction vs Symlink
+
+| 类型         | 说明                                       | 需要管理员权限 |
+| ------------ | ------------------------------------------ | -------------- |
+| Junction     | 目录联接，仅支持本地目录                   | 否             |
+| Symlink      | 符号链接，支持文件和远程路径               | 是（默认）     |
+
+> **推荐使用 Junction：** 开发场景下 Junction 兼容性更好，且不需要管理员权限创建。
+
+### 验证链接
+
+```powershell
+# 查看链接指向
+Get-Item "C:\Users\你的用户名\.pnpm-store" | Select-Object FullName, LinkType, Target
+
+# 或使用 dir 命令
+cmd /c dir "C:\Users\你的用户名" /AL
+```
+
+## 限制与注意事项
+
+- **不支持的场景：**
+  - 可移动/热插拔磁盘（USB、外部驱动器）
+  - 动态磁盘（请使用存储空间代替）
+  - C: 驱动器
+  
+- **内存占用：** ReFS 比 NTFS 使用更多内存，建议至少 8 GB，推荐 16 GB
+
+- **VHD 注意事项：**
+  - 固定磁盘上的 VHD 不建议复制，应移动后重新挂载
+  - 移动到新计算机后需重新指定为开发驱动器并配置筛选器策略
+
+- **WSL 兼容性：** 可从 WSL 访问开发驱动器上的文件，但不会有性能提升。ReFS 不支持 WSL metadata 装载选项。
+
+## 删除开发驱动器
+
+1. **设置 > 系统 > 存储 > 磁盘和卷**
+2. 选择开发驱动器旁的 **属性**
+3. 在格式标签下选择删除
+
+> 如果是 VHD 创建的，删除卷后还需在磁盘管理中分离 VHD 才能删除 VHD 文件。
+
+## 参考资料
+
+- [在 Windows 11 上设置开发驱动器 - Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/dev-drive/)
+- [利用 Dev Drive 提升 Visual Studio 和 Dev Boxes 的性能](https://devblogs.microsoft.com/visualstudio/devdriveperf/)

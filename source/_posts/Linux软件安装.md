@@ -1697,6 +1697,75 @@ read only = yes
 
 ## Nginx 安装
 
+### RHEL/CentOS 安装（官方仓库）
+
+适用于 Red Hat Enterprise Linux 及其衍生版本（CentOS、Oracle Linux、Rocky Linux、AlmaLinux）。
+
+#### 1. 安装前置依赖
+
+```shell
+sudo dnf install dnf-utils
+```
+
+#### 2. 创建仓库文件
+
+创建 `/etc/yum.repos.d/nginx.repo`：
+
+```shell
+sudo vim /etc/yum.repos.d/nginx.repo
+```
+
+写入以下内容：
+
+```ini
+[nginx-stable]
+name=nginx stable repo
+baseurl=https://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=https://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+```
+
+> 默认使用 stable 稳定版仓库。如需使用 mainline 主线版，执行：
+> ```shell
+> sudo dnf config-manager --enable nginx-mainline
+> ```
+
+#### 3. 安装 Nginx
+
+```shell
+sudo dnf install nginx
+```
+
+安装时会提示接受 GPG 密钥，确认指纹为 `573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62` 后接受。
+
+#### 4. 启动并验证
+
+```shell
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+```
+
+#### 5. 防火墙放行
+
+```shell
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+```
+
+---
+
 ### 源码编译安装
 
 ```shell
@@ -1707,7 +1776,7 @@ make
 make install
 ```
 
-### AlmaLinux dnf 安装
+### AlmaLinux源 dnf 安装
 
 ```shell
 # 确保软件是最新的
