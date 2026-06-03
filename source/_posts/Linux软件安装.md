@@ -108,31 +108,31 @@ wget -O 图片名.png https://www.baidu.com/img/bd_logo1.png
 
 ### 记录和输入文件参数
 
-| 参数 | 说明 |
-|-----|------|
-| `-o` | 把记录写到文件中 |
-| `-a` | 把记录追加到文件中 |
-| `-d` | 打印调试输出 |
-| `-q` | 安静模式（没有输出） |
-| `-v` | 冗长模式（缺省设置） |
-| `-nv` | 关掉冗长模式 |
-| `-i` | 下载文件中出现的 URLs |
-| `-F` | 把输入文件当作 HTML 格式 |
+| 参数  | 说明                     |
+| ----- | ------------------------ |
+| `-o`  | 把记录写到文件中         |
+| `-a`  | 把记录追加到文件中       |
+| `-d`  | 打印调试输出             |
+| `-q`  | 安静模式（没有输出）     |
+| `-v`  | 冗长模式（缺省设置）     |
+| `-nv` | 关掉冗长模式             |
+| `-i`  | 下载文件中出现的 URLs    |
+| `-F`  | 把输入文件当作 HTML 格式 |
 
 ### 下载参数
 
-| 参数 | 说明 |
-|-----|------|
-| `-t` | 设定最大尝试链接次数（0 表示无限制） |
-| `-O` | 把文档写到文件中 |
-| `-nc` | 不要覆盖存在的文件 |
-| `-c` | 接着下载没下载完的文件 |
-| `-N` | 不要重新下载文件除非比本地文件新 |
-| `-S` | 打印服务器的回应 |
-| `-T` | 设定响应超时的秒数 |
-| `-w` | 两次尝试之间间隔秒数 |
-| `-Q` | 设置下载的容量限制 |
-| `--limit-rate` | 限定下载速率 |
+| 参数           | 说明                                 |
+| -------------- | ------------------------------------ |
+| `-t`           | 设定最大尝试链接次数（0 表示无限制） |
+| `-O`           | 把文档写到文件中                     |
+| `-nc`          | 不要覆盖存在的文件                   |
+| `-c`           | 接着下载没下载完的文件               |
+| `-N`           | 不要重新下载文件除非比本地文件新     |
+| `-S`           | 打印服务器的回应                     |
+| `-T`           | 设定响应超时的秒数                   |
+| `-w`           | 两次尝试之间间隔秒数                 |
+| `-Q`           | 设置下载的容量限制                   |
+| `--limit-rate` | 限定下载速率                         |
 
 ---
 
@@ -791,9 +791,69 @@ curl -sS https://starship.rs/install.sh | sh
 
 #### 设置 Shell 启用
 
+编辑 `~/.zshrc`，在文件末尾添加以下内容：
+
 ```bash
-vim ~/.zshrc
+# ===== History 配置 =====
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS        # 忽略连续重复命令
+setopt HIST_IGNORE_ALL_DUPS    # 忽略所有重复命令
+setopt HIST_FIND_NO_DUPS       # 搜索时忽略重复
+setopt HIST_IGNORE_SPACE       # 忽略以空格开头的命令
+setopt HIST_SAVE_NO_DUPS       # 保存时忽略重复
+setopt SHARE_HISTORY           # 共享 history
+setopt APPEND_HISTORY          # 追加 history
+setopt INC_APPEND_HISTORY      # 立即追加
+
+
+# ===== 补全系统初始化（必须在插件之前） =====
+fpath=(~/.zsh/zsh-completions/src $fpath)
+autoload -Uz compinit
+compinit -C  # 使用缓存，跳过安全检查，加快启动
+zstyle ':completion:*' menu select
+
+
+# ===== 插件（顺序重要） =====
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# starship start
+eval "$(starship init zsh)"
+# starship end
+
+
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
 ```
+
+#### 安装 zsh-completions 补全插件
+
+[zsh-completions](https://github.com/zsh-users/zsh-completions) 提供额外的补全定义，增强 Tab 补全功能。
+
+```bash
+git clone https://github.com/zsh-users/zsh-completions ~/.zsh/zsh-completions
+
+# 国内镜像
+git clone https://gitee.com/mirrors/zsh-completions.git ~/.zsh/zsh-completions
+```
+
+#### 安装 zsh-autosuggestions 和 zsh-syntax-highlighting
+
+这两个插件也可以独立于 oh-my-zsh 安装到 `~/.zsh/` 目录：
+
+```bash
+# zsh-autosuggestions（命令提示）
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+# zsh-syntax-highlighting（语法高亮）
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+```
+
+> 如果已安装 oh-my-zsh，也可以使用其插件方式安装，详见 [ohmyzsh 推荐插件](#推荐插件)。
 
 在文件末尾添加以下内容
 
@@ -1103,10 +1163,6 @@ crust = "#181926"
 
 ```
 
-
-
-
-
 ## ohmyzsh 安装
 
 ohmyzsh 是一个管理 Zsh 配置的框架，提供丰富的主题和插件。
@@ -1119,12 +1175,12 @@ dnf install -y zsh
 
 ### 安装 ohmyzsh
 
-| 方式 | 命令 |
-|-----|------|
-| curl | `sh -c "$(curl -fsSL https://install.ohmyz.sh/)"` |
-| wget | `sh -c "$(wget -O- https://install.ohmyz.sh/)"` |
+| 方式             | 命令                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| curl             | `sh -c "$(curl -fsSL https://install.ohmyz.sh/)"`                                    |
+| wget             | `sh -c "$(wget -O- https://install.ohmyz.sh/)"`                                      |
 | 国内镜像（curl） | `sh -c "$(curl -fsSL https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"` |
-| 国内镜像（wget） | `sh -c "$(wget -O- https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"` |
+| 国内镜像（wget） | `sh -c "$(wget -O- https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"`   |
 
 > 注意：同意使用 oh-my-zsh 的配置模板覆盖已有的 `.zshrc`。
 
@@ -1800,10 +1856,10 @@ sudo firewall-cmd --reload
 
 ### 目录结构
 
-| 目录/文件 | 说明 |
-|----------|------|
-| `/etc/nginx` | 包含所有 Nginx 配置文件的主目录 |
-| `/etc/nginx/nginx.conf` | 主要的 Nginx 配置文件 |
-| `/etc/nginx/sites-available` | 定义各个网站的目录 |
-| `/etc/nginx/sites-enabled` | Nginx 积极服务的网站列表 |
-| `/var/log/nginx` | Nginx 日志目录 |
+| 目录/文件                    | 说明                            |
+| ---------------------------- | ------------------------------- |
+| `/etc/nginx`                 | 包含所有 Nginx 配置文件的主目录 |
+| `/etc/nginx/nginx.conf`      | 主要的 Nginx 配置文件           |
+| `/etc/nginx/sites-available` | 定义各个网站的目录              |
+| `/etc/nginx/sites-enabled`   | Nginx 积极服务的网站列表        |
+| `/var/log/nginx`             | Nginx 日志目录                  |
