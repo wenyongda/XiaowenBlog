@@ -513,6 +513,42 @@ setx /M npm_config_cache D:\packages\npm
 robocopy %AppData%\npm-cache D:\packages\npm /E
 ```
 
+#### nvm 用户配置全局包安装位置
+
+使用 nvm (Node Version Manager) 管理 Node.js 版本时，每个版本有独立的全局包目录。为避免切换版本后全局包不可用，可将全局包目录配置到固定位置：
+
+```powershell
+# 1. 创建全局包目录
+mkdir D:\packages\npm-global
+
+# 2. 配置 npm 使用新目录作为 prefix
+npm config set prefix D:\packages\npm-global
+
+# 3. 添加到 PATH 环境变量
+setx /M PATH "%PATH%;D:\packages\npm-global"
+
+# 4. 验证配置
+npm config get prefix
+npm config get cache
+```
+
+**配置说明：**
+- `prefix`：全局包安装目录，`npm install -g` 的包会安装到此目录下的 `node_modules` 子目录
+- `cache`：npm 缓存目录，存放下载的包压缩包
+- 配置后所有 Node.js 版本共享同一套全局包，切换版本无需重新安装
+
+**验证全局包目录：**
+```powershell
+# 查看当前 prefix 配置
+npm config get prefix
+
+# 查看全局包列表
+npm list -g --depth=0
+
+# 测试安装全局包
+npm install -g opencode-ai
+```
+
 ### NuGet (.NET)
 
 ```powershell
@@ -585,6 +621,9 @@ robocopy %USERPROFILE%\.gradle D:\packages\gradle /E
 ```powershell
 # npm 缓存目录
 npm config get cache
+
+# npm 全局包安装目录（prefix）
+npm config get prefix
 
 # yarn 缓存目录
 yarn cache dir
@@ -734,6 +773,72 @@ cmd /c dir "C:\Users\你的用户名" /AL
   - 移动到新计算机后需重新指定为开发驱动器并配置筛选器策略
 
 - **WSL 兼容性：** 可从 WSL 访问开发驱动器上的文件，但不会有性能提升。ReFS 不支持 WSL metadata 装载选项。
+
+## 扩容开发驱动器
+
+当开发驱动器空间不足时，可以通过以下步骤扩容 VHD 类型的开发驱动器。
+
+### 步骤一：扩展 VHD 文件大小
+
+以管理员身份打开 PowerShell，使用 `Resize-VHD` 命令扩展 VHD 文件：
+
+```powershell
+# 扩展 VHD 文件到 60GB（根据实际需求调整大小）
+Resize-VHD -Path 'E:\DevDrives\SourceCode.vhdx' -SizeBytes 60GB
+```
+
+> **注意：** 将路径和大小替换为实际的 VHD 文件路径和目标大小。`SizeBytes` 参数指定的是最终大小，不是增加量。
+
+### 步骤二：挂载 VHD 并扩展分区
+
+以管理员身份打开命令提示符，使用 diskpart 工具：
+
+```cmd
+# 启动 diskpart
+diskpart
+
+# 选择 VHD 文件
+select vdisk file="E:\DevDrives\SourceCode.vhdx"
+
+# 挂载 VHD
+attach vdisk
+
+# 查看磁盘列表，找到 VHD 对应的磁盘编号
+list disk
+
+# 选择 VHD 磁盘（替换 X 为实际磁盘编号）
+select disk X
+
+# 查看分区列表
+list partition
+
+# 选择 Dev Drive 分区（替换 Y 为实际分区编号）
+select partition Y
+
+# 扩展分区，使用所有未分配空间
+extend
+
+# 退出 diskpart
+exit
+```
+
+![image-20260604112051119](https://rustfs.wenyongdalucky.club:443/hexo/image-20260604112051119.png)
+
+### 步骤三：验证扩容结果
+
+```powershell
+# 检查 VHD 信息
+Get-VHD -Path 'E:\DevDrives\SourceCode.vhdx'
+
+# 或在文件资源管理器中查看驱动器属性
+```
+
+### 注意事项
+
+- 扩容操作不会丢失数据，但建议提前备份重要文件
+- VHD 必须处于**分离（detach）状态**才能调整大小，如果已挂载需先分离
+- 扩展分区时，未分配空间必须紧邻目标分区（右侧）
+- 如果未分配空间不在目标分区右侧，可能需要使用第三方分区工具调整
 
 ## 删除开发驱动器
 
