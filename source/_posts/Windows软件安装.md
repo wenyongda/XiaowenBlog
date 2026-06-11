@@ -104,3 +104,33 @@ winget --proxy <url>
 winget --no-proxy
 ```
 
+#### 使用代理
+
+##### 命令行参数（单次使用）
+
+1. 开启配置（需要管理员权限）
+
+```powershell
+winget settings --enable ProxyCommandLineOptions
+```
+
+2. 使用
+
+```powershell
+winget install Git.Git --proxy http://127.0.0.1:10809
+```
+
+##### 管理员配置（全局生效）
+
+开启配置（需要管理员权限）
+
+```powershell
+winget settings set DefaultProxy http://127.0.0.1:10809
+```
+
+关闭配置（需要管理员权限）
+
+```powershell
+winget settings reset DefaultProxy
+```
+

@@ -541,6 +541,9 @@ Install-Module PSFzf -Scope CurrentUser -Force
 
 # 5. 安装 fzf 本体
 winget install junegunn.fzf
+
+# 6. 安装 winget 命令未找到 提示工具
+Install-PSResource -Name Microsoft.WinGet.CommandNotFound
 ```
 
 #### PowerShell 5.1 安装依赖
