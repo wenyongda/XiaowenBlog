@@ -133,15 +133,15 @@ Invoke-Expression (&starship init powershell)
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](red)\
+[](red)\
 $os\
 $username\
-[](bg:peach fg:red)\
+[](bg:peach fg:red)\
 $directory\
-[](bg:yellow fg:peach)\
+[](bg:yellow fg:peach)\
 $git_branch\
 $git_status\
-[](fg:yellow bg:green)\
+[](fg:yellow bg:green)\
 $c\
 $rust\
 $golang\
@@ -152,11 +152,11 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:green bg:sapphire)\
+[](fg:green bg:sapphire)\
 $conda\
-[](fg:sapphire bg:lavender)\
+[](fg:sapphire bg:lavender)\
 $time\
-[ ](fg:lavender)\
+[ ](fg:lavender)\
 $cmd_duration\
 $line_break\
 $character"""
@@ -168,23 +168,23 @@ disabled = false
 style = "bg:red fg:crust"
 
 [os.symbols]
-Windows = ""
+Windows = ""
 Ubuntu = "󰕈"
-SUSE = ""
+SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
 Macos = "󰀵"
-Manjaro = ""
+Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
 Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-AOSC = ""
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
 Arch = "󰣇"
 Artix = "󰣇"
-CentOS = ""
+CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
@@ -203,13 +203,13 @@ truncation_symbol = "…/"
 
 [directory.substitutions]
 "Documents" = "󰈙 "
-"Downloads" = " "
+"Downloads" = " "
 "Music" = "󰝚 "
-"Pictures" = " "
+"Pictures" = " "
 "Developer" = "󰲋 "
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
@@ -218,62 +218,62 @@ style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
 [nodejs]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [bun]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [c]
-symbol = " "
+symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [rust]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [golang]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [php]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [java]
-symbol = " "
+symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [kotlin]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [haskell]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
 [python]
-symbol = ""
+symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
 
 [docker_context]
-symbol = ""
+symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
 
 [conda]
-symbol = "  "
+symbol = "  "
 style = "fg:crust bg:sapphire"
 format = '[$symbol$environment ]($style)'
 ignore_base = false
@@ -282,7 +282,7 @@ ignore_base = false
 disabled = false
 time_format = "%R"
 style = "bg:lavender"
-format = '[[  $time ](fg:crust bg:lavender)]($style)'
+format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
 [line_break]
 disabled = false
@@ -298,7 +298,7 @@ vimcmd_visual_symbol = '[❮](bold fg:yellow)'
 
 [cmd_duration]
 show_milliseconds = true
-format = " in $duration "
+format = " in $duration "
 style = "bg:lavender"
 disabled = false
 show_notifications = true
@@ -406,7 +406,7 @@ lavender = "#b7bdf8"
 text = "#cad3f5"
 subtext1 = "#b8c0e0"
 subtext0 = "#a5adcb"
-overlay2 = "#9399b7"
+overlay2 = "#939ab7"
 overlay1 = "#8087a2"
 overlay0 = "#6e738d"
 surface2 = "#5b6078"
@@ -754,11 +754,11 @@ PS · <当前目录名> [<Git分支>] <管理员标识>
 
 **示例效果：**
 
-| 场景 | 窗口标题 |
-|------|----------|
-| 普通目录 | `PS · Downloads` |
-| Git 仓库 | `PS · my-project [main]` |
-| 管理员身份 | `PS · System32 ⚡ADMIN` |
+| 场景         | 窗口标题                          |
+| ------------ | --------------------------------- |
+| 普通目录     | `PS · Downloads`                  |
+| Git 仓库     | `PS · my-project [main]`          |
+| 管理员身份   | `PS · System32 ⚡ADMIN`            |
 | 管理员 + Git | `PS · infra [feat/deploy] ⚡ADMIN` |
 
 **实现原理：** 利用 Starship 预留的 `Invoke-Starship-PreCommand` 钩子函数，在每次渲染 Prompt 之前执行，与 Starship 完全兼容，无冲突。
@@ -767,41 +767,41 @@ PS · <当前目录名> [<Git分支>] <管理员标识>
 
 配置分为四个层次，可按需选择叠加：
 
-| 层次 | 功能 | 说明 |
-|------|------|------|
+| 层次    | 功能                | 说明                                                  |
+| ------- | ------------------- | ----------------------------------------------------- |
 | Layer 1 | PSReadLine 历史预测 | 输入部分命令后，灰色文字实时预测完整命令，按 `→` 接受 |
-| Layer 2 | Tab 菜单补全 | 按 `Tab` 弹出候选菜单，上下键选择，`Enter` 确认 |
-| Layer 3 | posh-git 补全 | 为 `git` 命令提供子命令、分支名、远程名等补全 |
-| Layer 4 | PSFzf 模糊搜索 | `Ctrl+R` 调出交互式历史命令搜索窗口，支持模糊匹配 |
+| Layer 2 | Tab 菜单补全        | 按 `Tab` 弹出候选菜单，上下键选择，`Enter` 确认       |
+| Layer 3 | posh-git 补全       | 为 `git` 命令提供子命令、分支名、远程名等补全         |
+| Layer 4 | PSFzf 模糊搜索      | `Ctrl+R` 调出交互式历史命令搜索窗口，支持模糊匹配     |
 
 ### 快捷键速查
 
-| 快捷键 | 功能 | PS5.1 | PS7+ |
-|--------|------|-------|------|
-| `→` | 接受行内预测 | ✅ | ✅ |
-| `Tab` | 菜单补全，循环切换候选 | ✅ | ✅ |
-| `Shift+Tab` | 反向切换候选 | ✅ | ✅ |
-| `Ctrl+Space` | 显示所有候选项 | ✅ | ✅ |
-| `↑ / ↓` | 按前缀过滤历史记录 | ✅ | ✅ |
-| `Ctrl+R` | fzf 模糊历史搜索 | ✅ | ✅ |
-| `Ctrl+T` | fzf 模糊文件查找 | ✅ | ✅ |
-| `F2` | 切换 InlineView / ListView | ❌ | ✅ |
+| 快捷键       | 功能                       | PS5.1 | PS7+ |
+| ------------ | -------------------------- | ----- | ---- |
+| `→`          | 接受行内预测               | ✅     | ✅    |
+| `Tab`        | 菜单补全，循环切换候选     | ✅     | ✅    |
+| `Shift+Tab`  | 反向切换候选               | ✅     | ✅    |
+| `Ctrl+Space` | 显示所有候选项             | ✅     | ✅    |
+| `↑ / ↓`      | 按前缀过滤历史记录         | ✅     | ✅    |
+| `Ctrl+R`     | fzf 模糊历史搜索           | ✅     | ✅    |
+| `Ctrl+T`     | fzf 模糊文件查找           | ✅     | ✅    |
+| `F2`         | 切换 InlineView / ListView | ❌     | ✅    |
 
 ### 版本功能对照
 
-| 功能 | PS5.1 | PS7+ | 说明 |
-|------|-------|------|------|
-| `PredictionSource History` | ✅ | ✅ | 基于历史命令预测 |
-| `PredictionSource HistoryAndPlugin` | ❌ | ✅ | 额外加入插件预测源 |
-| `PredictionViewStyle InlineView` | ✅ | ✅ | 行内灰字预测 |
-| `PredictionViewStyle ListView` | ❌ | ✅ | 下拉候选列表 |
-| `F2` 切换预测视图 | ❌ | ✅ | 实时切换两种视图 |
-| PSReadLine 最高版本 | 2.3.x | 最新版 | 安装时需注意 |
-| posh-git | ✅ | ✅ | 版本一致 |
-| PSFzf | ✅ | ✅ | 版本一致 |
-| WinGet 补全 | ✅ | ✅ | 编码处理略有差异 |
-| Starship 钩子 | ✅ | ✅ | 函数名一致 |
-| 动态窗口标题 | ✅ | ✅ | 实现方式一致 |
+| 功能                                | PS5.1 | PS7+   | 说明               |
+| ----------------------------------- | ----- | ------ | ------------------ |
+| `PredictionSource History`          | ✅     | ✅      | 基于历史命令预测   |
+| `PredictionSource HistoryAndPlugin` | ❌     | ✅      | 额外加入插件预测源 |
+| `PredictionViewStyle InlineView`    | ✅     | ✅      | 行内灰字预测       |
+| `PredictionViewStyle ListView`      | ❌     | ✅      | 下拉候选列表       |
+| `F2` 切换预测视图                   | ❌     | ✅      | 实时切换两种视图   |
+| PSReadLine 最高版本                 | 2.3.x | 最新版 | 安装时需注意       |
+| posh-git                            | ✅     | ✅      | 版本一致           |
+| PSFzf                               | ✅     | ✅      | 版本一致           |
+| WinGet 补全                         | ✅     | ✅      | 编码处理略有差异   |
+| Starship 钩子                       | ✅     | ✅      | 函数名一致         |
+| 动态窗口标题                        | ✅     | ✅      | 实现方式一致       |
 
 > PS5.1 缺少的 `ListView` 和 `HistoryAndPlugin` 可通过 PSFzf 的 `Ctrl+R` 模糊搜索弥补，日常体验差距不大。
 
@@ -1071,7 +1071,7 @@ if ($expirationDate -le $threshold) {
 
 ### 🧩 步骤 2：设置任务基本信息
 
-- 常规 
+- 常规
 
   选项卡：
 
@@ -1104,7 +1104,7 @@ if ($expirationDate -le $threshold) {
    - 参数（可选）：`-ExecutionPolicy RemoteSigned -File "C:\VSCELicense\Check-VS-LicenseExpiration.ps1`
    - 起始于（可选）：`C:\VSCELicense`（确保路径正确）
 
-> ✅ **说明** ： 
+> ✅ **说明** ：
 >
 > - `-ExecutionPolicy RemoteSigned`：允许本地脚本运行，避免执行策略限制。
 > - `"C:\VSCELicense\Check-VS-LicenseExpiration.ps1"`：替换为你实际的脚本路径。
