@@ -54,10 +54,19 @@ yum makecache
 #### 更换阿里源
 
 ```shell
-yum install -y wget &&
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup &&
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo &&
-yum clean all &&
+sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
+    -i.bak \
+    /etc/yum.repos.d/[Rr]ocky*.repo
+    # 注意 8 系列 Rocky R 大些，9 系列 r 小写 (sysin)
+    # 阿里云文档有误无法匹配：https://developer.aliyun.com/mirror/rockylinux
+
+# 恢复 (sysin)
+sed -e 's|^#mirrorlist=|mirrorlist=|g' \
+    -e 's|^baseurl=https://mirrors.aliyun.com/rockylinux|#baseurl=http://dl.rockylinux.org/$contentdir|g' \
+    -i.bak \
+    /etc/yum.repos.d/[Rr]ocky*.repo
+
 yum makecache
 ```
 
@@ -84,6 +93,172 @@ dnf search package
 
 # 清理缓存
 dnf clean all
+```
+
+---
+
+### yum / dnf / dnf5 区别
+
+| 特性 | yum | dnf | dnf5 |
+| --- | --- | --- | --- |
+| 语言 | Python | Python (C 底层) | C++ |
+| 默认版本 | CentOS 7 | CentOS 8 / Fedora 22~38 | Fedora 39+ / RHEL 10 |
+| 依赖解析 | 速度慢 | 速度快，libsolv 引擎 | 更快，Rust 重写核心 |
+| 事务历史 | 支持 | 支持 | 支持，API 更强 |
+| 插件体系 | 旧 | 兼容 yum 插件 | 全新插件架构 |
+| 向后兼容 | — | `dnf` 命令兼容 `yum` | `dnf` 指向 `dnf5`（软链接） |
+
+> **简单理解**：`dnf` 是 `yum` 的现代替代，`dnf5` 是 `dnf` 的下一代重写。三者命令行语法基本一致，日常使用无需区分。
+
+---
+
+### yum.repos.d 配置详解
+
+#### 目录结构
+
+```shell
+/etc/yum.repos.d/
+├── CentOS-Base.repo          # 基础源
+├── CentOS-AppStream.repo     # 应用流
+├── CentOS-PowerTools.repo    # 扩展工具
+├── epel.repo                 # EPEL 扩展源
+├── nginx.repo                # 自定义第三方源
+└── ...
+```
+
+> 所有 `.repo` 文件都会被自动加载，文件名任意，关键是 `.repo` 后缀。
+
+#### .repo 文件结构
+
+```ini
+[repo-id]              # 仓库唯一标识，同一文件内不能重复
+name=Repository Name   # 仓库描述名称
+baseurl=               # 仓库地址（三选一或组合）
+# mirrorlist=          # 镜像列表 URL（与 baseurl 二选一）
+# metalink=            # 元数据校验 URL
+enabled=1              # 是否启用（1 启用，0 禁用）
+gpgcheck=1             # 是否校验包 GPG 签名
+repo_gpgcheck=0        # 是否校验仓库元数据 GPG 签名
+gpgkey=                # GPG 公钥地址
+metadata_expire=24h    # 元数据缓存过期时间（24h / 6h / 1d / 1h）
+countme=1              # 是否上报系统架构统计（1 开启，0 关闭）
+priority=              # 优先级（需安装 dnf-plugins-core）
+module_hotfixes=true   # 是否跳过模块过滤（DNF 专用）
+```
+
+#### baseurl 支持的协议
+
+| 协议 | 示例 |
+| --- | --- |
+| http/https | `baseurl=https://mirrors.aliyun.com/centos/8/BaseOS/x86_64/os/` |
+| file (本地) | `baseurl=file:///mnt/cdrom/` |
+| ftp | `baseurl=ftp://mirror.example.com/pub/centos/` |
+
+> 多个地址可用 `$releasever`、`$basearch` 等变量自动替换版本和架构。
+
+#### 常用变量
+
+| 变量 | 说明 | 示例值 |
+| --- | --- | --- |
+| `$releasever` | 系统主版本号 | `8` / `9` |
+| `$basearch` | CPU 架构 | `x86_64` / `aarch64` |
+| `$contentdir` | 内容目录 | `os` / `repo` |
+| `$infra` | 基础设施类型 | `stock` / `container` |
+
+#### 常用操作
+
+```shell
+# 列出所有已启用的仓库
+dnf repolist
+
+# 列出所有仓库（含禁用的）
+dnf repolist all
+
+# 临时禁用某个仓库
+dnf --disablerepo=epel install package
+
+# 临时启用某个仓库
+dnf --enablerepo=cr install package
+
+# 查看仓库详细信息
+dnf repoinfo epel
+
+# 清理并重建缓存
+dnf clean all && dnf makecache
+```
+
+#### 自定义仓库配置示例
+
+创建 `/etc/yum.repos.d/custom.repo`：
+
+```ini
+[custom-repo]
+name=Custom Repository
+baseurl=https://mirror.example.com/centos/8/AppStream/x86_64/os/
+enabled=1
+gpgcheck=1
+gpgkey=https://mirror.example.com/RPM-GPG-KEY-custom
+```
+
+#### 优先级配置
+
+安装 `dnf-plugins-core` 后可设置优先级：
+
+```shell
+dnf install dnf-plugins-core
+```
+
+在 `.repo` 文件中添加 `priority`：
+
+```ini
+[base]
+name=CentOS Base
+baseurl=https://mirrors.aliyun.com/centos/$releasever/BaseOS/$basearch/os/
+enabled=1
+gpgcheck=1
+priority=1              # 优先级：1 最高，99 最低
+
+[epel]
+name=EPEL
+baseurl=https://mirrors.aliyun.com/epel/8/Everything/$basearch/
+enabled=1
+gpgcheck=1
+priority=10
+```
+
+> 建议：官方源 `priority=1`，EPEL 等第三方源 `priority=10`，避免覆盖系统核心包。
+
+#### 忽略仓库
+
+```shell
+# 临时忽略单个仓库
+dnf --disablerepo=epel install package
+
+# 永久禁用
+# 编辑 .repo 文件，将 enabled=1 改为 enabled=0
+```
+
+#### GPG 签名管理
+
+```shell
+# 导入 GPG 密钥
+rpm --import https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-Official
+
+# 查看已导入的密钥
+rpm -qa gpg-pubkey*
+
+# 删除密钥
+rpm -e gpg-pubkey-xxxxxxxx-xxxxxxxx
+```
+
+#### 备份与恢复
+
+```shell
+# 备份所有 repo 文件
+cp -r /etc/yum.repos.d/ /etc/yum.repos.d.bak/
+
+# 恢复
+cp -r /etc/yum.repos.d.bak/* /etc/yum.repos.d/
 ```
 
 ---
@@ -1264,6 +1439,25 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # 国内镜像
 git clone https://gitee.com/pocmon/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
+
+#### fzf
+
+[Fzf](https://github.com/junegunn/fzf) 是一个命令行模糊查找工具，支持文件、历史命令、进程等搜索。
+
+安装
+
+- RHEL
+
+  ```bash
+  dnf install epel-release
+  dnf install fzf
+  ```
+
+- Ubuntu
+
+  ```bash
+  apt install fzf
+  ```
 
 #### z（内置）
 
