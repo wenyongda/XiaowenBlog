@@ -53,6 +53,8 @@ yum makecache
 
 #### 更换阿里源
 
+##### Rocky Linux
+
 ```shell
 sed -e 's|^mirrorlist=|#mirrorlist=|g' \
     -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
@@ -61,13 +63,30 @@ sed -e 's|^mirrorlist=|#mirrorlist=|g' \
     # 注意 8 系列 Rocky R 大些，9 系列 r 小写 (sysin)
     # 阿里云文档有误无法匹配：https://developer.aliyun.com/mirror/rockylinux
 
-# 恢复 (sysin)
+# 恢复
 sed -e 's|^#mirrorlist=|mirrorlist=|g' \
     -e 's|^baseurl=https://mirrors.aliyun.com/rockylinux|#baseurl=http://dl.rockylinux.org/$contentdir|g' \
     -i.bak \
     /etc/yum.repos.d/[Rr]ocky*.repo
 
-yum makecache
+dnf makecache
+```
+
+##### AlmaLinux
+
+```shell
+sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^#baseurl=https://repo.almalinux.org|baseurl=https://mirrors.aliyun.com/almalinux|g' \
+    -i.bak \
+    /etc/yum.repos.d/almalinux*.repo
+
+# 恢复
+sed -e 's|^#mirrorlist=|mirrorlist=|g' \
+    -e 's|^baseurl=https://mirrors.aliyun.com/almalinux|#baseurl=https://repo.almalinux.org|g' \
+    -i.bak \
+    /etc/yum.repos.d/almalinux*.repo
+
+dnf makecache
 ```
 
 ---
