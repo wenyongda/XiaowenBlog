@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "active_work_id": "elsa-activiti-comparison-98c09385",
+  "works": {
+    "elsa-activiti-comparison-98c09385": {
+      "work_id": "elsa-activiti-comparison-98c09385",
+      "active_plan": "G:\\Source\\repos\\XiaowenBlog\\.omo\\plans\\elsa-activiti-comparison.md",
+      "plan_name": "elsa-activiti-comparison",
+      "status": "completed",
+      "started_at": "2026-06-17T05:45:03.831Z",
+      "updated_at": "2026-06-17T05:49:39.689Z",
+      "session_ids": [
+        "opencode:ses_12bf2a096ffedupptD5XsYcF0M"
+      ],
+      "session_origins": {
+        "opencode:ses_12bf2a096ffedupptD5XsYcF0M": "direct"
+      },
+      "agent": "atlas",
+      "task_sessions": {
+        "todo:1": {
+          "task_key": "todo:1",
+          "task_label": "1",
+          "task_title": "补充 Elsa-Workflows-3.md 文档内容",
+          "session_id": "opencode:ses_12be1628effeIb7KGhchbdKAs4",
+          "agent": "Sisyphus-Junior",
+          "category": "quick",
+          "updated_at": "2026-06-17T05:49:00.215Z",
+          "started_at": "2026-06-17T05:48:41.403Z",
+          "status": "completed",
+          "ended_at": "2026-06-17T05:49:00.215Z",
+          "elapsed_ms": 18812
+        }
+      },
+      "ended_at": "2026-06-17T05:49:39.689Z",
+      "elapsed_ms": 275858
+    }
+  },
+  "active_plan": "G:\\Source\\repos\\XiaowenBlog\\.omo\\plans\\elsa-activiti-comparison.md",
+  "started_at": "2026-06-17T05:45:03.831Z",
+  "status": "completed",
+  "updated_at": "2026-06-17T05:49:39.689Z",
+  "session_ids": [
+    "opencode:ses_12bf2a096ffedupptD5XsYcF0M"
+  ],
+  "session_origins": {
+    "opencode:ses_12bf2a096ffedupptD5XsYcF0M": "direct"
+  },
+  "plan_name": "elsa-activiti-comparison",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "补充 Elsa-Workflows-3.md 文档内容",
+      "session_id": "opencode:ses_12be1628effeIb7KGhchbdKAs4",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-06-17T05:49:00.215Z",
+      "started_at": "2026-06-17T05:48:41.403Z",
+      "status": "completed",
+      "ended_at": "2026-06-17T05:49:00.215Z",
+      "elapsed_ms": 18812
+    }
+  },
+  "agent": "atlas",
+  "ended_at": "2026-06-17T05:49:39.689Z",
+  "elapsed_ms": 275858
+}
