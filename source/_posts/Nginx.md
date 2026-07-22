@@ -80,6 +80,154 @@ fastcgi_param  SERVER_SOFTWARE    nginx;
 
 重启Nginx服务
 
+---
+
+## HTTP 重定向到 HTTPS
+
+### 方式一：return 301（推荐）
+
+在 HTTP server 块中直接返回 301 永久重定向：
+
+```conf
+server {
+    listen 80;
+    server_name example.com www.example.com;
+
+    # HTTP 重定向到 HTTPS
+    return 301 https://$host$request_uri;
+}
+```
+
+> `return 301` 是最常用的方式，浏览器会缓存 301 重定向，后续请求直接访问 HTTPS。
+
+### 方式二：rewrite 重写
+
+```conf
+server {
+    listen 80;
+    server_name example.com www.example.com;
+
+    rewrite ^(.*)$ https://$host$1 permanent;
+}
+```
+
+> `permanent` 表示 301 永久重定向，`redirect` 表示 302 临时重定向。
+
+### 完整 HTTPS 配置示例
+
+```conf
+# HTTP -> HTTPS 重定向
+server {
+    listen 80;
+    server_name example.com www.example.com;
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS 配置
+server {
+    listen 443 ssl;
+    server_name example.com www.example.com;
+
+    ssl_certificate     /etc/nginx/ssl/example.com.pem;
+    ssl_certificate_key /etc/nginx/ssl/example.com.key;
+
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+---
+
+## error_page 497 配置
+
+### 背景
+
+`497` 是 Nginx 自定义状态码，表示**客户端发送的 HTTP 请求通过 HTTPS 端口访问**（即客户端用 HTTP 协议请求了 443 端口），Nginx 会返回 `400 Bad Request`。
+
+常见场景：Nginx 启用了 HTTPS，但客户端用 `http://` 访问 443 端口。
+
+### 配置方法
+
+在 HTTPS server 块中添加：
+
+```conf
+server {
+    listen 443 ssl;
+    server_name example.com;
+
+    ssl_certificate     /etc/nginx/ssl/example.com.pem;
+    ssl_certificate_key /etc/nginx/ssl/example.com.key;
+
+    # 将 HTTP 请求重定向到 HTTPS
+    error_page 497 =301 https://$host$request_uri;
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}
+```
+
+### 各状态码对比
+
+| 状态码 | 含义 | 处理方式 |
+|--------|------|----------|
+| `497` | HTTP 请求到达 HTTPS 端口 | 跳转到 HTTPS |
+| `400` | 请求格式错误 | 返回错误页 |
+| `301` | 永久重定向 | 浏览器缓存 |
+| `302` | 临时重定向 | 不缓存 |
+
+### 与 return 301 配合使用
+
+```conf
+# 方式一：HTTP server 块 return 301（处理正常 HTTP 请求）
+server {
+    listen 80;
+    server_name example.com;
+    return 301 https://$host$request_uri;
+}
+
+# 方式二：HTTPS server 块 error_page 497（处理错误的 HTTP 请求）
+server {
+    listen 443 ssl;
+    server_name example.com;
+
+    ssl_certificate     /etc/nginx/ssl/example.com.pem;
+    ssl_certificate_key /etc/nginx/ssl/example.com.key;
+
+    # 修复 HTTP 请求访问 HTTPS 端口的问题
+    error_page 497 =301 https://$host$request_uri;
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}
+```
+
+### 重定向到指定页面
+
+```conf
+# 497 跳转到自定义错误页
+error_page 497 @handle497;
+
+location @handle497 {
+    return 301 https://$host$request_uri;
+}
+```
+
+---
+
 ## 配置
 
 ```conf

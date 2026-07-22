@@ -1445,7 +1445,7 @@ dnf groupinstall "Development Tools" -y
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # 国内镜像
-git clone https://gitee.com/pocmon/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://gitee.com/mirrors/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 #### zsh-syntax-highlighting
@@ -1456,7 +1456,7 @@ git clone https://gitee.com/pocmon/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zs
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # 国内镜像
-git clone https://gitee.com/pocmon/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://gitee.com/mirror-luyi/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
 #### fzf
@@ -1495,7 +1495,7 @@ git clone https://gitee.com/pocmon/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.
 修改 `~/.zshrc`：
 
 ```shell
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting z extract web-search)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting z extract web-search fzf)
 ```
 
 执行 `source ~/.zshrc` 生效。
